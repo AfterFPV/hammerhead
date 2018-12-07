@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <list>
 #include <iterator>
 #include <iostream>
@@ -11,42 +12,71 @@ using namespace std;
 using namespace std;
 
 
-class Coordinate {
+class Coord {
     protected:
         float x, y;
     public:
-        Coordinate(float x, float y): x(x), y(y) {
+        Coord(float x, float y): x(x), y(y) {
         }
-}
-
-class AstrObject {
-	protected:
-		int x, y;
-        int dmg, range;
-		int speed;
-        int size;
-
-	public:
-        AstrObject(int x, int y, int dmg, int speed, int range, int size) :
-        x(x), y(y), dmg(dmg), speed(speed), range(range), size(size) {
-        }
-
-		int get_X();
-        int get_Y();
-        int get_size();
-	private: 
-		int update_position();
-		int attack();
+        int get_intX();
+        int get_intY();
+        float get_floatX();
+        float get_floatY();
 };
 
-int AstrObject::get_X() {
+int Coord::get_intX() {
+    return (int)x;
+}
 
+int Coord::get_intY() {
+    return (int)y;
+}
+
+float Coord::get_floatX() {
     return x;
 }
 
-int AstrObject::get_Y() {
-
+float Coord::get_floatY() {
     return y;
+}
+
+
+
+class AstrObject {
+	protected:
+		Coord pos;
+        Coord center;
+        float radius, speed;
+        float size;
+        int dmg, range;
+
+	public:
+        AstrObject(Coord pos, Coord center, float radius, float speed, float size, int dmg, int range) :
+            pos(pos), center(center), radius(radius), speed(speed), size(size), dmg(dmg), range(range) {
+        }
+
+        Coord get_position();
+        Coord get_center();
+        float get_radius();
+        int get_size();
+	private: 
+		void update_position();
+		int attack();
+};
+
+Coord AstrObject::get_position() {
+
+    return pos;
+}
+
+Coord AstrObject::get_center() {
+ 
+    return center;
+}
+
+float AstrObject::get_radius() {
+
+    return radius;
 }
 
 int AstrObject::get_size() {
@@ -54,6 +84,13 @@ int AstrObject::get_size() {
     return size;
 }
 
+void AstrObject::update_position()
+{
+
+
+}
+
+/*
 class Ship: public AstrObject {
 	
 	protected:
@@ -73,7 +110,7 @@ class Planet: public AstrObject {
             AstrObject(x, y, dmg, speed, range, size) {
         }
 };
-
+*/
 
 
 
@@ -91,6 +128,7 @@ class Space {
     private:
         void blank_map();
         void draw_map();
+        void draw_orbit(AstrObject &obj);
         void add_center(AstrObject);
 };
 
@@ -124,8 +162,9 @@ void Space::print_list() {
     
     for (it = objs.begin(); it != objs.end(); it++) {
 
-        x = it->get_X();
-        y = it->get_Y();
+        //pos = &(it->get_position());
+        x = it->get_position().get_intX();
+        y = it->get_position().get_intY();
        
         cout << "x = " << x << ", y = " << y << endl;
     }
@@ -146,9 +185,10 @@ void Space::draw_map() {
     list<AstrObject>::iterator it;
     
     for (it = objs.begin(); it != objs.end(); it++) {
-
-        x = it->get_X();
-        y = it->get_Y();
+        
+        x = it->get_position().get_intX();
+        y = it->get_position().get_intY();
+       
         size = it->get_size();
        
         two_d[x][y] = 'x';
@@ -158,7 +198,35 @@ void Space::draw_map() {
                 two_d[i][j] = 'x';
             }
         }
+
+        draw_orbit((*it));
     }
+}
+
+void Space::draw_orbit(AstrObject &obj) {
+
+    float radius;
+    const float PI = 3.14159;
+    Coord center = obj.get_center();
+    int x, y;
+    float cent_x, cent_y;
+    float tmp_x, tmp_y;
+    
+    cent_x = center.get_floatX();
+    cent_y = center.get_floatY();
+    radius = obj.get_radius();
+
+    for (float angle=0; angle<=2*PI; angle+=0.01) {
+
+        tmp_x = cent_x + (radius * cos(angle));
+        tmp_y = cent_y + (radius * sin(angle));
+
+        x = (int)tmp_x;
+        y = (int)tmp_y;
+
+        two_d[x][y] = '-';
+    }
+
 }
 
 void Space::add_center(AstrObject obj) {
@@ -175,15 +243,21 @@ int main(int argc, char **argv)
     cout << "hello" << endl;
 
     Space one;
-    AstrObject intrepid(1,1,100,43,50,1);
-    AstrObject bad_guys(10,10,100,43,50,1);
-    AstrObject earth(14,14,0,0,0,4);
-    AstrObject moon(20,10,0,0,0,2);
+
+    Coord tmp_pos(1,1);
+    Coord tmp_cent(15.5,15.5);
+
+    Coord earth_pos(14,14);
+
+    AstrObject intrepid(tmp_pos,tmp_cent,10.0,1.0,1.0,0,0);
+    //AstrObject bad_guys(10,10,100,43,50,1);
+    AstrObject earth(earth_pos,earth_pos,10.0,1.0,4.0,0,0);
+    //AstrObject moon(20,10,0,0,0,2);
     
-    one.add_object(intrepid);
-    one.add_object(bad_guys);
+    //one.add_object(intrepid);
+    //one.add_object(bad_guys);
     one.add_object(earth);
-    one.add_object(moon);
+    //one.add_object(moon);
 
 
 
