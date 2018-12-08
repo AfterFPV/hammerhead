@@ -19,4 +19,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Software\lib\SDL2\SDL2.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
