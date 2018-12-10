@@ -1,4 +1,28 @@
+#pragma once
+
 #include "Space.h"
+
+Space::Space() :
+	Space(MIN_SPACE_SIZE, MIN_SPACE_SIZE) {
+}
+
+Space::Space(int column_count, int row_count) {
+	this->column_count = MIN_SPACE_SIZE;
+	this->row_count = MIN_SPACE_SIZE;
+
+	if ((column_count > MIN_SPACE_SIZE) && (column_count < MAX_SPACE_SIZE)) {
+		this->column_count = column_count;
+	}
+
+	if ((row_count > MIN_SPACE_SIZE) && (row_count < MAX_SPACE_SIZE)) {
+		this->row_count = row_count;
+	}
+
+	init_map();
+
+	blank_map();
+}
+
 
 void Space::init_map() {
 	two_d = new char*[this->column_count];
@@ -12,7 +36,7 @@ void Space::tick() {
 	update_map();
 }
 
-void Space::add_object(AstrObject obj) {
+void Space::add_object(AstralObject obj) {
 	objs.push_back(obj);
 }
 
@@ -69,7 +93,7 @@ void Space::draw_map() {
 
 void Space::print_list() {
 
-	list<AstrObject>::iterator it;
+	list<AstralObject>::iterator it;
 	int x, y;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
@@ -95,7 +119,7 @@ void Space::update_map() {
 
 	int x, y, size;
 
-	list<AstrObject>::iterator it;
+	list<AstralObject>::iterator it;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
 		it->update_position();
@@ -116,7 +140,7 @@ void Space::update_map() {
 	}
 }
 
-void Space::update_orbit(AstrObject &obj) {
+void Space::update_orbit(AstralObject &obj) {
 
 	float radius;
 	const float PI = 3.14159;
@@ -142,7 +166,7 @@ void Space::update_orbit(AstrObject &obj) {
 
 }
 
-void Space::add_center(AstrObject obj) {
+void Space::add_center(AstralObject obj) {
 
 
 }
