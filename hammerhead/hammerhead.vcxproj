@@ -162,8 +162,10 @@ xcopy /y "$(ProjectDir)assets\images\*.png" "$(TargetDir)"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CelestialBody.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Space.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,15 +176,21 @@ xcopy /y "$(ProjectDir)assets\images\*.png" "$(TargetDir)"</Command>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AstralObject.h" />
+    <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Coord.h" />
     <ClInclude Include="DisplayAsset.h" />
     <ClInclude Include="DisplayAssets.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="GameTexture.h" />
+    <ClInclude Include="Moon.h" />
     <ClInclude Include="Planet.h" />
+    <ClInclude Include="PlanetFactory.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="ShipFactory.h" />
     <ClInclude Include="Space.h" />
+    <ClInclude Include="SpaceObject.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "AstralObject.h"
+#include "SpaceObject.h"
+#include "CelestialBody.h"
 #include <list>
 #include <iterator>
 #include <iostream>
@@ -22,9 +23,9 @@ private:
 	int column_count;
 	SDL_Renderer* renderer;
 public:
-	list<AstralObject> objs;
+	list<SpaceObject> objs;
 	void tick();
-	void add_object(AstralObject obj);
+	void add_object(SpaceObject obj);
 	void draw_map();
 	void print_list();
 	void set_renderer(SDL_Renderer* value);
@@ -35,7 +36,7 @@ private:
 	void init_map();
 	void blank_map();
 	void update_map();
-	void update_orbit(AstralObject &obj);
-	void add_center(AstralObject);
+	void update_orbit(CelestialBody &obj);
+	void add_center(SpaceObject);
 };
 

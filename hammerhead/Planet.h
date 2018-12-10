@@ -1,9 +1,10 @@
 #pragma once
-#include "AstralObject.h"
+#include "CelestialBody.h"
+#include "DisplayAssets.h"
 
-class Planet : public AstralObject {
+class Planet : public CelestialBody {
 public:
-	Planet(Coord pos, Coord center, float radius, Vector2 direction, float size, int dmg, int range) :
-		AstralObject(pos, center, radius, direction, size, dmg, range) {
+	Planet(Coord pos, Coord center, Vector2 direction, float radius) :
+		CelestialBody(pos, center, direction, radius) {
 	}
 };

@@ -19,7 +19,6 @@ Space::Space(int column_count, int row_count) {
 	}
 
 	init_map();
-
 	blank_map();
 }
 
@@ -36,7 +35,8 @@ void Space::tick() {
 	update_map();
 }
 
-void Space::add_object(AstralObject obj) {
+void Space::add_object(SpaceObject obj) {
+	obj.set_renderer(this->renderer);
 	objs.push_back(obj);
 }
 
@@ -53,9 +53,11 @@ void Space::set_window_size(int width, int height) {
 }
 
 void Space::draw_map() {
+	/*
 	int posX = 0;
 	int posY = 0;
 
+	//Draw map grid
 	for (int i = 0; i < this->column_count; i++) {
 		posY = i * this->tile_height;
 
@@ -82,9 +84,16 @@ void Space::draw_map() {
 			tile.y = posY;
 
 			SDL_RenderFillRect(renderer, &tile);
-			//cout << two_d[i][j] << " ";
 		}
-		//cout << endl;
+	}*/
+	//Clear draw area
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+
+	//Draw objects in space
+	list<SpaceObject>::iterator it;
+	for (it = objs.begin(); it != objs.end(); it++) {
+		it->draw();
 	}
 
 	// Render the changes above
@@ -93,7 +102,7 @@ void Space::draw_map() {
 
 void Space::print_list() {
 
-	list<AstralObject>::iterator it;
+	list<SpaceObject>::iterator it;
 	int x, y;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
@@ -115,32 +124,42 @@ void Space::blank_map() {
 }
 
 void Space::update_map() {
+	/*
 	blank_map();
 
-	int x, y, size;
-
-	list<AstralObject>::iterator it;
+	int x, y, width, height;
+	*/
+	list<SpaceObject>::iterator it;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
 		it->update_position();
+
+		/*
 		x = (int)(it->get_position().get_floatX() + it->get_direction().x);
 		y = (int)(it->get_position().get_floatY() + it->get_direction().y);
 
-		size = it->get_size();
+		width = it->get_size().x;
+		height = it->get_size().y;
 
 		two_d[x][y] = 'x';
 
-		for (int i = x; i < x + size; i++) {
-			for (int j = y; j < y + size; j++) {
+		for (int i = x; i < x + width; i++) {
+			for (int j = y; j < y + height; j++) {
 				two_d[i][j] = 'x';
 			}
 		}
 
-		update_orbit((*it));
+		//CelestialBody* body = dynamic_cast<CelestialBody*>(&(*it));
+		//CelestialBody& body = dynamic_cast<CelestialBody&>((*it));
+
+		//if (body != NULL) {
+		//	update_orbit((*body));
+		//}
+		*/
 	}
 }
 
-void Space::update_orbit(AstralObject &obj) {
+void Space::update_orbit(CelestialBody &obj) {
 
 	float radius;
 	const float PI = 3.14159;
@@ -166,7 +185,7 @@ void Space::update_orbit(AstralObject &obj) {
 
 }
 
-void Space::add_center(AstralObject obj) {
+void Space::add_center(SpaceObject obj) {
 
 
 }
