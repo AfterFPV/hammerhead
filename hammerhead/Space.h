@@ -23,9 +23,9 @@ private:
 	int column_count;
 	SDL_Renderer* renderer;
 public:
-	list<SpaceObject> objs;
+	list<unique_ptr<SpaceObject>> objs;
 	void tick();
-	void add_object(SpaceObject obj);
+	void add_object(unique_ptr<SpaceObject> obj);
 	void draw_map();
 	void print_list();
 	void set_renderer(SDL_Renderer* value);
@@ -37,6 +37,5 @@ private:
 	void blank_map();
 	void update_map();
 	void update_orbit(CelestialBody &obj);
-	void add_center(SpaceObject);
 };
 

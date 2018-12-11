@@ -35,9 +35,9 @@ void Space::tick() {
 	update_map();
 }
 
-void Space::add_object(SpaceObject obj) {
-	obj.set_renderer(this->renderer);
-	objs.push_back(obj);
+void Space::add_object(unique_ptr<SpaceObject> obj) {
+	obj->set_renderer(this->renderer);
+	objs.push_back(move(obj));
 }
 
 void Space::set_renderer(SDL_Renderer* value) {
@@ -53,10 +53,34 @@ void Space::set_window_size(int width, int height) {
 }
 
 void Space::draw_map() {
-	/*
+	
 	int posX = 0;
 	int posY = 0;
 
+	//Clear draw area
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+
+	SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+
+	//Draw map grid
+	for (int i = 0; i < this->column_count; i++) {
+		posY = i * this->tile_height;
+
+		for (int j = 0; j < this->row_count; j++) {
+			posX = j * this->tile_width;
+
+			SDL_Rect tile;
+			tile.h = tile_height;
+			tile.w = tile_width;
+			tile.x = posX;
+			tile.y = posY;
+
+			SDL_RenderDrawRect(renderer, &tile);
+		}
+	}
+
+	/*
 	//Draw map grid
 	for (int i = 0; i < this->column_count; i++) {
 		posY = i * this->tile_height;
@@ -68,13 +92,13 @@ void Space::draw_map() {
 
 			switch (tile_type) {
 			case 'x':
-				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+				SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 				break;
 			case '-':
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 				break;
 			case '.':
-				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+				SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 				break;
 			}
 			SDL_Rect tile;
@@ -83,17 +107,14 @@ void Space::draw_map() {
 			tile.x = posX;
 			tile.y = posY;
 
-			SDL_RenderFillRect(renderer, &tile);
+			SDL_RenderDrawRect(renderer, &tile);
 		}
 	}*/
-	//Clear draw area
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
 
 	//Draw objects in space
-	list<SpaceObject>::iterator it;
+	list<unique_ptr<SpaceObject>>::iterator it;
 	for (it = objs.begin(); it != objs.end(); it++) {
-		it->draw();
+		it->get()->draw();
 	}
 
 	// Render the changes above
@@ -101,15 +122,14 @@ void Space::draw_map() {
 }
 
 void Space::print_list() {
-
-	list<SpaceObject>::iterator it;
+	list<unique_ptr<SpaceObject>>::iterator it;
 	int x, y;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
 
-		//pos = &(it->get_position());
-		x = (int)(it->get_position().get_floatX() + it->get_direction().x);
-		y = (int)(it->get_position().get_floatY() + it->get_direction().y);
+		SpaceObject* obj = it->get();
+		x = (int)(obj->get_position().get_floatX() + obj->get_direction().x);
+		y = (int)(obj->get_position().get_floatY() + obj->get_direction().y);
 
 		cout << "x = " << x << ", y = " << y << endl;
 	}
@@ -124,17 +144,25 @@ void Space::blank_map() {
 }
 
 void Space::update_map() {
-	/*
+	list<unique_ptr<SpaceObject>>::iterator it;
+
+	for (it = objs.begin(); it != objs.end(); it++) {
+		it->get()->update_position();
+	}
+}
+
+/*
+void Space::update_map() {
+	
 	blank_map();
 
 	int x, y, width, height;
-	*/
-	list<SpaceObject>::iterator it;
+	
+	list<unique_ptr<SpaceObject>>::iterator it;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
-		it->update_position();
+		it->get()->update_position();
 
-		/*
 		x = (int)(it->get_position().get_floatX() + it->get_direction().x);
 		y = (int)(it->get_position().get_floatY() + it->get_direction().y);
 
@@ -155,9 +183,9 @@ void Space::update_map() {
 		//if (body != NULL) {
 		//	update_orbit((*body));
 		//}
-		*/
+	
 	}
-}
+}*/
 
 void Space::update_orbit(CelestialBody &obj) {
 
@@ -182,10 +210,5 @@ void Space::update_orbit(CelestialBody &obj) {
 
 		two_d[x][y] = '-';
 	}
-
-}
-
-void Space::add_center(SpaceObject obj) {
-
 
 }
