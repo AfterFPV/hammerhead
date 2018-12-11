@@ -15,19 +15,12 @@ public:
 
 	void load() {
 		load_png_asset("planet");
+		load_png_asset("planet-large");
 	}
 
 	void load_png_asset(string name) {
 		string png_file_name = name + ".png";
-		SDL_Surface* surface = IMG_Load("planet.png");
-		
-		if (surface == NULL)
-		{
-			string error_text = SDL_GetError();
-			printf("Unable to load image %s! SDL Error: %s\n", png_file_name, error_text);
-		}
-
-		DisplayAsset asset(name, png_file_name, surface);
+		DisplayAsset asset(name, png_file_name);
 		assets[name] = asset;
 	}
 
@@ -36,7 +29,18 @@ public:
 
 		for (it = assets.begin(); it != assets.end(); it++)
 		{
-			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, it->second.get_surface());
+			string png_file_name = it->second.get_resource_name();
+			SDL_Surface* surface = IMG_Load(png_file_name.c_str());
+			if (surface == NULL)
+			{
+				string error_text = SDL_GetError();
+				printf("Unable to load image %s! SDL Error: %s\n", png_file_name, error_text);
+			}
+
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+			SDL_FreeSurface(surface);
+			//SDL_Texture* texture = IMG_LoadTexture(renderer, it->second.get_resource_name().c_str());
+			
 			it->second.set_texture(texture);
 		}
 	}

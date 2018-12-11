@@ -167,6 +167,7 @@ xcopy /y "$(ProjectDir)assets\images\*.png" "$(TargetDir)"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Space.cpp" />
+    <ClCompile Include="SpaceObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\..\..\Software\lib\SDL2\SDL2.dll">
@@ -185,12 +186,16 @@ xcopy /y "$(ProjectDir)assets\images\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameTexture.h" />
     <ClInclude Include="Moon.h" />
+    <ClInclude Include="Orbit.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="Planet.h" />
-    <ClInclude Include="PlanetFactory.h" />
+    <ClInclude Include="CelestialBodyFactory.h" />
+    <ClInclude Include="SdlPrimatives.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipFactory.h" />
     <ClInclude Include="Space.h" />
     <ClInclude Include="SpaceObject.h" />
+    <ClInclude Include="Sun.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
