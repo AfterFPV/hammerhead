@@ -16,6 +16,7 @@ public:
 	void load() {
 		load_png_asset("planet");
 		load_png_asset("planet-large");
+		load_png_asset("ship");
 	}
 
 	void load_png_asset(string name) {

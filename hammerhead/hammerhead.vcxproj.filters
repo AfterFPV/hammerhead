@@ -123,5 +123,8 @@
     <Image Include="images\planet.png">
       <Filter>Resource Files\images</Filter>
     </Image>
+    <Image Include="images\ship.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

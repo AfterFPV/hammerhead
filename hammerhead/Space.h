@@ -37,6 +37,7 @@ private:
 	void init_map();
 	void blank_map();
 	void update_map();
+	void draw_grid();
 	void update_orbit(CelestialBody &obj);
 };
 

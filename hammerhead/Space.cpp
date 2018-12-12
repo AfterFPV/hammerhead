@@ -52,18 +52,10 @@ void Space::set_window_size(int width, int height) {
 	this->tile_height = height / this->row_count;
 }
 
-void Space::draw_map() {
-	
+void Space::draw_grid() {
 	int posX = 0;
 	int posY = 0;
 
-	//Clear draw area
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
-
-	SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
-
-	//Draw map grid
 	for (int i = 0; i < this->column_count; i++) {
 		posY = i * this->tile_height;
 
@@ -79,37 +71,16 @@ void Space::draw_map() {
 			SDL_RenderDrawRect(renderer, &tile);
 		}
 	}
+}
 
-	/*
-	//Draw map grid
-	for (int i = 0; i < this->column_count; i++) {
-		posY = i * this->tile_height;
+void Space::draw_map() {
+	//Clear draw area
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
 
-		for (int j = 0; j < this->row_count; j++) {
-			posX = j * this->tile_width;
+	SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 
-			char tile_type = two_d[i][j];
-
-			switch (tile_type) {
-			case 'x':
-				SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
-				break;
-			case '-':
-				SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
-				break;
-			case '.':
-				SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
-				break;
-			}
-			SDL_Rect tile;
-			tile.h = tile_height;
-			tile.w = tile_width;
-			tile.x = posX;
-			tile.y = posY;
-
-			SDL_RenderDrawRect(renderer, &tile);
-		}
-	}*/
+	draw_grid();	
 
 	//Draw objects in space
 	list<unique_ptr<SpaceObject>>::iterator it;

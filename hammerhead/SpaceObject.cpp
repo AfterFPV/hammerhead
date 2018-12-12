@@ -43,8 +43,8 @@ void SpaceObject::update_orbit() {
 		float center_offset_x = this->center.get_floatX() - this->pos.get_floatX();
 		float center_offset_y = this->center.get_floatY() - this->pos.get_floatY();
 
-		this->pos = Coord(this->orbit->get_abs_x(), this->orbit->get_abs_y());
-		this->center = Coord(this->pos.get_floatX() + center_offset_x, this->pos.get_floatY() + center_offset_y);
+		this->center = Coord(this->orbit->get_abs_center_x(), this->orbit->get_abs_center_y());
+		this->pos = Coord(this->center.get_floatX() - center_offset_x, this->center.get_floatY() - center_offset_y);
 	}
 }
 
@@ -69,10 +69,6 @@ void SpaceObject::draw_orbit() {
 		int orbit_x = this->orbit->get_body()->get_center().get_intX();
 		int orbit_y = this->orbit->get_body()->get_center().get_intY();
 		int orbit_radius = this->orbit->get_radius();
-
-		//int orbit_x = 176;
-		//int orbit_y = 176;
-		//int orbit_radius = 100;
 
 		SdlPrimatives::draw_circle(this->renderer, orbit_x, orbit_y, orbit_radius, this->orbit_color);		
 	}

@@ -9,8 +9,8 @@ private:
 	float phase_step;
 	float speed;
 	float radius;
-	float abs_x;
-	float abs_y;
+	float abs_center_x;
+	float abs_center_y;
 	float x;
 	float y;
 	int steps_per_rotation = 1000;
@@ -61,12 +61,12 @@ public:
 		return this->y;
 	}
 
-	float get_abs_x() {
-		return this->abs_x;
+	float get_abs_center_x() {
+		return this->abs_center_x;
 	}
 
-	float get_abs_y() {
-		return this->abs_y;
+	float get_abs_center_y() {
+		return this->abs_center_y;
 	}
 
 	void update_phase();
