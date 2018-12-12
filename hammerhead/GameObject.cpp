@@ -24,6 +24,8 @@ Vector2 GameObject::get_size() {
 
 void GameObject::set_direction(Vector2 direction) {
 	this->direction = direction;
+
+	calculate_orientation();
 }
 
 void GameObject::draw() {
@@ -32,7 +34,9 @@ void GameObject::draw() {
 	for (it = textures.begin(); it != textures.end(); it++) {
 		SDL_Rect display_rect = { this->pos.get_intX() + it->get_relative_pos().get_intX(), this->pos.get_intY() + it->get_relative_pos().get_intY(), it->get_width(), it->get_height() };
 		SDL_SetTextureColorMod(it->get_texture(), it->get_color().r, it->get_color().g, it->get_color().b);
-		SDL_RenderCopy(renderer, it->get_texture(), NULL, &display_rect);
+		
+		float angle = this->orientation_degrees + ASSET_ROTATION_OFFSET;
+		SDL_RenderCopyEx(renderer, it->get_texture(), NULL, &display_rect, angle, NULL, SDL_FLIP_NONE);
 	}
 }
 
@@ -50,4 +54,9 @@ void GameObject::set_name(string name) {
 
 string GameObject::get_name() {
 	return this->name;
+}
+
+void GameObject::calculate_orientation() {
+	this->orientation = atan2(0.5, 0.5);
+	this->orientation_degrees = this->orientation * 180 / M_PI;
 }
