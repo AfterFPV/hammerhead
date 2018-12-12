@@ -201,12 +201,6 @@ xcopy /y "$(ProjectDir)assets\images\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\assets\images\planet.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\..\..\Software\lib\SDL2\libjpeg-9.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
@@ -225,6 +219,10 @@ xcopy /y "$(ProjectDir)assets\images\*.png" "$(TargetDir)"</Command>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\planet-large.png" />
+    <Image Include="images\planet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

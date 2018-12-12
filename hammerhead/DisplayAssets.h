@@ -19,7 +19,8 @@ public:
 	}
 
 	void load_png_asset(string name) {
-		string png_file_name = name + ".png";
+		string image_folder = "images";
+		string png_file_name = image_folder + "/" + name + ".png";
 		DisplayAsset asset(name, png_file_name);
 		assets[name] = asset;
 	}
