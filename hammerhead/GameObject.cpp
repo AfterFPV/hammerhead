@@ -10,14 +10,11 @@ void GameObject::update_position() {
 	center = Coord(center.get_floatX() + direction.x, center.get_floatY() + direction.y);
 }
 
-
 Vector2 GameObject::get_direction() {
-
 	return direction;
 }
 
 Coord GameObject::get_center() {
-
 	return center;
 }
 
@@ -34,6 +31,7 @@ void GameObject::draw() {
 
 	for (it = textures.begin(); it != textures.end(); it++) {
 		SDL_Rect display_rect = { this->pos.get_intX() + it->get_relative_pos().get_intX(), this->pos.get_intY() + it->get_relative_pos().get_intY(), it->get_width(), it->get_height() };
+		SDL_SetTextureColorMod(it->get_texture(), it->get_color().r, it->get_color().g, it->get_color().b);
 		SDL_RenderCopy(renderer, it->get_texture(), NULL, &display_rect);
 	}
 }

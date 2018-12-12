@@ -5,6 +5,7 @@
 #include <list>
 #include <iterator>
 #include <iostream>
+#include <memory>
 #include <SDL2/SDL.h>
 
 constexpr int MIN_SPACE_SIZE = 32;

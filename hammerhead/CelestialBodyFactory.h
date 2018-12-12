@@ -11,6 +11,10 @@ class CelestialBodyFactory
 {
 public:
 	static unique_ptr<Planet> create_planet(string name, Coord pos, float radius, DisplayAsset asset) {
+		return move(create_planet(name, pos, radius, asset, Color(255, 255, 255)));
+	}
+
+	static unique_ptr<Planet> create_planet(string name, Coord pos, float radius, DisplayAsset asset, Color color) {
 		Coord center = Coord(pos.get_floatX() + radius, pos.get_floatY() + radius);
 		Vector2 direction(0, 0);
 
@@ -18,13 +22,17 @@ public:
 		planet->set_name(name);
 
 		float diameter = radius * 2;
-		GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter);
+		GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter, color);
 		planet->add_texture(texture);
 
 		return move(planet);
 	}
 
 	static unique_ptr<Moon> create_moon(string name, Coord pos, float radius, DisplayAsset asset) {
+		return move(create_moon(name, pos, radius, asset, Color(255, 255, 255)));
+	}
+
+	static unique_ptr<Moon> create_moon(string name, Coord pos, float radius, DisplayAsset asset, Color color) {
 		Coord center = Coord(pos.get_floatX() + radius, pos.get_floatY() + radius);
 		Vector2 direction(0, 0);
 
@@ -32,13 +40,17 @@ public:
 		moon->set_name(name);
 
 		float diameter = radius * 2;
-		GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter);
+		GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter, color);
 		moon->add_texture(texture);
 
 		return move(moon);
 	}
 
 	static unique_ptr<Sun> create_sun(string name, Coord pos, float radius, DisplayAsset asset) {
+		return move(create_sun(name, pos, radius, asset, Color(255, 255, 255)));
+	}
+
+	static unique_ptr<Sun> create_sun(string name, Coord pos, float radius, DisplayAsset asset, Color color) {
 		Coord center = Coord(pos.get_floatX() + radius, pos.get_floatY() + radius);
 		Vector2 direction(0, 0);
 
@@ -46,7 +58,7 @@ public:
 		sun->set_name(name);
 
 		float diameter = radius * 2;
-		GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter);
+		GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter, color);
 		sun->add_texture(texture);
 
 		return move(sun);

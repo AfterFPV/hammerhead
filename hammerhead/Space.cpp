@@ -147,6 +147,10 @@ void Space::update_map() {
 	list<unique_ptr<SpaceObject>>::iterator it;
 
 	for (it = objs.begin(); it != objs.end(); it++) {
+		it->get()->update_orbit();
+	}
+
+	for (it = objs.begin(); it != objs.end(); it++) {
 		it->get()->update_position();
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "Color.h"
 #include <SDL2/SDL.h>
 
 typedef int32_t s32;
@@ -6,7 +7,7 @@ typedef int32_t s32;
 class SdlPrimatives
 {
 public:
-	static void draw_circle(SDL_Renderer* renderer, s32 _x, s32 _y, s32 radius)
+	static void draw_circle(SDL_Renderer* renderer, s32 _x, s32 _y, s32 radius, Color color)
 	{
 		s32 x = radius - 1;
 		s32 y = 0;
@@ -14,10 +15,8 @@ public:
 		s32 ty = 1;
 		s32 err = tx - (radius << 1); // shifting bits left by 1 effectively
 									  // doubles the value. == tx - diameter
-
 		
-		SDL_SetRenderDrawColor(renderer, 236, 205, 53, 255);
-		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
 
 		while (x >= y)
 		{
