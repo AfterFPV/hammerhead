@@ -164,7 +164,7 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
   <ItemGroup>
     <ClCompile Include="CelestialBody.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="gl3w.c" />
+    <ClCompile Include="GL\gl3w.c" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
@@ -194,8 +194,8 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameTexture.h" />
-    <ClInclude Include="gl3w.h" />
-    <ClInclude Include="glcorearb.h" />
+    <ClInclude Include="GL\gl3w.h" />
+    <ClInclude Include="GL\glcorearb.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
     <ClInclude Include="imgui_impl_opengl3.h" />

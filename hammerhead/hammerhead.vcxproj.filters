@@ -63,7 +63,7 @@
     <ClCompile Include="imgui_impl_opengl3.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="gl3w.c">
+    <ClCompile Include="GL\gl3w.c">
       <Filter>gl3w</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,10 +161,10 @@
     <ClInclude Include="imgui_impl_opengl3.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="gl3w.h">
+    <ClInclude Include="GL\gl3w.h">
       <Filter>gl3w</Filter>
     </ClInclude>
-    <ClInclude Include="glcorearb.h">
+    <ClInclude Include="GL\glcorearb.h">
       <Filter>gl3w</Filter>
     </ClInclude>
   </ItemGroup>
