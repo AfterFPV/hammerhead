@@ -112,8 +112,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Software\lib\SDL2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Software\lib\SDL2;C:\Software\lib\GL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)*.dll" "$(TargetDir)"
@@ -164,6 +164,13 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
   <ItemGroup>
     <ClCompile Include="CelestialBody.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="gl3w.c" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_impl_sdl.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Orbit.cpp" />
     <ClCompile Include="Ship.cpp" />
@@ -187,8 +194,19 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameTexture.h" />
+    <ClInclude Include="gl3w.h" />
+    <ClInclude Include="glcorearb.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_impl_sdl.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="Moon.h" />
     <ClInclude Include="Orbit.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="CelestialBodyFactory.h" />
@@ -201,6 +219,9 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Software\lib\glfw\lib-vc2010-64\opengl32.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="..\..\..\..\Software\lib\SDL2\libjpeg-9.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
@@ -221,6 +242,7 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\box.png" />
     <Image Include="images\planet-large.png" />
     <Image Include="images\planet.png" />
     <Image Include="images\ship.png" />

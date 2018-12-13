@@ -16,6 +16,12 @@
     <Filter Include="Resource Files\images">
       <UniqueIdentifier>{08f27d46-c083-4b6a-b9a1-9895b817766c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{c764dbad-f7f7-4f15-af24-22e4b95a4990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gl3w">
+      <UniqueIdentifier>{690dffab-f382-42d3-8994-87b549b3af8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +44,27 @@
     </ClCompile>
     <ClCompile Include="Orbit.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_sdl.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="gl3w.c">
+      <Filter>gl3w</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +134,39 @@
     <ClInclude Include="Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_sdl.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="gl3w.h">
+      <Filter>gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="glcorearb.h">
+      <Filter>gl3w</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll" />
@@ -115,6 +175,7 @@
     <None Include="..\..\..\..\Software\lib\SDL2\libtiff-5.dll" />
     <None Include="..\..\..\..\Software\lib\SDL2\libwebp-7.dll" />
     <None Include="..\..\..\..\Software\lib\SDL2\SDL2_image.dll" />
+    <None Include="..\..\..\..\Software\lib\glfw\lib-vc2010-64\opengl32.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\planet-large.png">
@@ -124,6 +185,9 @@
       <Filter>Resource Files\images</Filter>
     </Image>
     <Image Include="images\ship.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="images\box.png">
       <Filter>Resource Files\images</Filter>
     </Image>
   </ItemGroup>

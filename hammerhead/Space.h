@@ -23,6 +23,7 @@ private:
 	int row_count;
 	int column_count;
 	SDL_Renderer* renderer;
+	SpaceObject* selected_object;
 public:
 	list<unique_ptr<SpaceObject>> objs;
 	void tick();
@@ -38,6 +39,7 @@ private:
 	void blank_map();
 	void update_map();
 	void draw_grid();
+	void draw_selected();
 	void update_orbit(CelestialBody &obj);
 };
 

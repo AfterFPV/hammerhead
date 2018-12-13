@@ -126,41 +126,11 @@ void Space::update_map() {
 	}
 }
 
-/*
-void Space::update_map() {
-	
-	blank_map();
+void Space::draw_selected() {
+	if (this->selected_object != nullptr) {
 
-	int x, y, width, height;
-	
-	list<unique_ptr<SpaceObject>>::iterator it;
-
-	for (it = objs.begin(); it != objs.end(); it++) {
-		it->get()->update_position();
-
-		x = (int)(it->get_position().get_floatX() + it->get_direction().x);
-		y = (int)(it->get_position().get_floatY() + it->get_direction().y);
-
-		width = it->get_size().x;
-		height = it->get_size().y;
-
-		two_d[x][y] = 'x';
-
-		for (int i = x; i < x + width; i++) {
-			for (int j = y; j < y + height; j++) {
-				two_d[i][j] = 'x';
-			}
-		}
-
-		//CelestialBody* body = dynamic_cast<CelestialBody*>(&(*it));
-		//CelestialBody& body = dynamic_cast<CelestialBody&>((*it));
-
-		//if (body != NULL) {
-		//	update_orbit((*body));
-		//}
-	
 	}
-}*/
+}
 
 void Space::update_orbit(CelestialBody &obj) {
 

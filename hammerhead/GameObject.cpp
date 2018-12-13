@@ -60,3 +60,19 @@ void GameObject::calculate_orientation() {
 	this->orientation = atan2(0.5, 0.5);
 	this->orientation_degrees = this->orientation * 180 / M_PI;
 }
+
+bool GameObject::hit_test(Coord location) {
+	if (this->is_clickable) {
+
+	}
+
+	return false;
+}
+
+void GameObject::set_z_index(int value) {
+	this->z_index = value;
+}
+
+int GameObject::get_z_index() {
+	return this->z_index;
+}
