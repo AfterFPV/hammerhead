@@ -22,6 +22,15 @@
     <Filter Include="gl3w">
       <UniqueIdentifier>{690dffab-f382-42d3-8994-87b549b3af8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\models">
+      <UniqueIdentifier>{3a49eb2d-fc06-49c4-b6e2-772bc253411f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\models\stl">
+      <UniqueIdentifier>{ebb49b77-02c0-4416-8aa1-2e3381250695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{c4e8c887-34a5-4171-be55-5d0566259465}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,6 +176,12 @@
     <ClInclude Include="GL\glcorearb.h">
       <Filter>gl3w</Filter>
     </ClInclude>
+    <ClInclude Include="ModelAsset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelAssets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll" />
@@ -176,6 +191,15 @@
     <None Include="..\..\..\..\Software\lib\SDL2\libwebp-7.dll" />
     <None Include="..\..\..\..\Software\lib\SDL2\SDL2_image.dll" />
     <None Include="..\..\..\..\Software\lib\glfw\lib-vc2010-64\opengl32.dll" />
+    <None Include="models\stl\sphere.stl">
+      <Filter>Resource Files\models\stl</Filter>
+    </None>
+    <None Include="shaders\tutorial2.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\tutorial2.vert">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\planet-large.png">

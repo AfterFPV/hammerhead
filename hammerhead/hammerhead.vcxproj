@@ -204,6 +204,8 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="ModelAsset.h" />
+    <ClInclude Include="ModelAssets.h" />
     <ClInclude Include="Moon.h" />
     <ClInclude Include="Orbit.h" />
     <ClInclude Include="Window.h" />
@@ -240,6 +242,9 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="models\stl\sphere.stl" />
+    <None Include="shaders\tutorial2.frag" />
+    <None Include="shaders\tutorial2.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\box.png" />
