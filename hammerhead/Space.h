@@ -22,6 +22,7 @@ private:
 	int tile_height;
 	int row_count;
 	int column_count;
+	int tick_count;
 	SDL_Renderer* renderer;
 	SpaceObject* selected_object;
 public:
@@ -30,6 +31,7 @@ public:
 	void add_object(unique_ptr<SpaceObject> obj);
 	void draw_map();
 	void print_list();
+	int get_tick_count();
 	void set_renderer(SDL_Renderer* value);
 	void set_window_size(int width, int height);
 	Space();

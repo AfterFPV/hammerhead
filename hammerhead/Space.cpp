@@ -7,6 +7,7 @@ Space::Space() :
 }
 
 Space::Space(int column_count, int row_count) {
+	this->tick_count = 0;
 	this->column_count = MIN_SPACE_SIZE;
 	this->row_count = MIN_SPACE_SIZE;
 
@@ -33,6 +34,12 @@ void Space::init_map() {
 
 void Space::tick() {
 	update_map();
+
+	this->tick_count++;
+}
+
+int Space::get_tick_count() {
+	return this->tick_count;
 }
 
 void Space::add_object(unique_ptr<SpaceObject> obj) {

@@ -311,13 +311,13 @@ void GameEngine::draw() {
 	// Model matrix : an identity matrix (model will be at the origin)
 	glm::mat4 Model = glm::mat4(1.0f);
 
-	int i = 0;
+	int i = space.get_tick_count();
 
 
 	//Load the identity matrix into model matrix, rotate the model, and move it back by 5
 	//memcpy(model_matrix, identity_matrix, sizeof(GLfloat) * 16);
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClearColor(0.0, 0.0, 0.0, 1.0);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	float x_angle_radians = glm::radians((GLfloat)i * 1.0);
 	float y_angle_radians = glm::radians((GLfloat)i * 1.0);
