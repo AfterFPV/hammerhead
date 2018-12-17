@@ -75,6 +75,9 @@
     <ClCompile Include="GL\gl3w.c">
       <Filter>gl3w</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\..\..\Software\lib\SDL2\SDL2.dll" />
@@ -180,6 +183,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelAssets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset3dCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -163,6 +163,7 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CelestialBody.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GL\gl3w.c" />
     <ClCompile Include="imgui.cpp" />
@@ -185,6 +186,8 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asset3d.h" />
+    <ClInclude Include="Asset3dCollection.h" />
     <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Coord.h" />

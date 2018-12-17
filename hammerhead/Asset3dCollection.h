@@ -1,16 +1,16 @@
 #pragma once
+
 #include <map>
 #include <string>
-#include <SDL2/SDL.h>
-#include "ModelAsset.h"
+#include "Asset3d.h"
 
 using namespace std;
 
-class ModelAssets {
+class Asset3dCollection {
 private:
-	map<string, ModelAsset> assets;
+	map<string, Asset3d> assets;
 public:
-	ModelAssets() {
+	Asset3dCollection() {
 	}
 
 	void load() {
@@ -20,16 +20,15 @@ public:
 	void load_stl_asset(string name) {
 		string stl_model_folder = "models/stl";
 		string model_file_name = stl_model_folder + "/" + name + ".stl";
-		ModelAsset asset(name, model_file_name);
+		Asset3d asset(name, model_file_name);
 		assets[name] = asset;
 	}
 
-	void setup_textures(SDL_Renderer* renderer) {
-		map<string, ModelAsset>::iterator it;
+	void setup_models() {
+
 	}
 
-	ModelAsset& get_asset(string name) {
+	Asset3d& get_asset(string name) {
 		return assets[name];
 	}
 };
-
