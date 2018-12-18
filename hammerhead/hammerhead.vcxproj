@@ -120,7 +120,9 @@
 mkdir "$(TargetDir)\images"
 mkdir "$(TargetDir)\models\obj"
 xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)\images"
-xcopy /y "$(ProjectDir)\models\obj\*.obj" "$(TargetDir)\models\obj"</Command>
+xcopy /y "$(ProjectDir)\models\obj\*.obj" "$(TargetDir)\models\obj"
+xcopy /y "$(ProjectDir)\models\obj\*.mtl" "$(TargetDir)\models\obj"
+xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy Required DLL to output</Message>
@@ -250,6 +252,7 @@ xcopy /y "$(ProjectDir)\models\obj\*.obj" "$(TargetDir)\models\obj"</Command>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="models\obj\ship-1.mtl" />
     <None Include="models\stl\sphere.stl" />
     <None Include="shaders\tutorial2.frag" />
     <None Include="shaders\tutorial2.vert" />
@@ -259,12 +262,19 @@ xcopy /y "$(ProjectDir)\models\obj\*.obj" "$(TargetDir)\models\obj"</Command>
     <Image Include="images\planet-large.png" />
     <Image Include="images\planet.png" />
     <Image Include="images\ship.png" />
+    <Image Include="models\obj\ship-1-int.png" />
+    <Image Include="models\obj\ship-1-mat.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="models\obj\sphere.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\obj\ship-1.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

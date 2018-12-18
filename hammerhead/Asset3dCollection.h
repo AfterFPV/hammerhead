@@ -18,6 +18,7 @@ public:
 
 	void load() {
 		load_obj_asset("sphere");
+		load_obj_asset("ship-1");
 	}
 
 	void load_obj_asset(string name) {

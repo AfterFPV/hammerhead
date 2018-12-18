@@ -227,6 +227,9 @@
     <None Include="shaders\tutorial2.vert">
       <Filter>shaders</Filter>
     </None>
+    <None Include="models\obj\ship-1.mtl">
+      <Filter>Resource Files\models\obj</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\planet-large.png">
@@ -241,10 +244,21 @@
     <Image Include="images\box.png">
       <Filter>Resource Files\images</Filter>
     </Image>
+    <Image Include="models\obj\ship-1-int.png">
+      <Filter>Resource Files\models\obj</Filter>
+    </Image>
+    <Image Include="models\obj\ship-1-mat.png">
+      <Filter>Resource Files\models\obj</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="models\obj\sphere.obj">
       <Filter>Resource Files\models\obj</Filter>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\obj\ship-1.obj">
+      <Filter>Resource Files\models\obj</Filter>
+    </Object>
   </ItemGroup>
 </Project>

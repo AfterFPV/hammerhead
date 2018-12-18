@@ -47,6 +47,6 @@ private:
 	GLchar* fragment_source;
 	void init_assets();
 	void init_space();
-	void setup_map();
+	void init_map();
 	char* file_read(const char* filename);
 };
