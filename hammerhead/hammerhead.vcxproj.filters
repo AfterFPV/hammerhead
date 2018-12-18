@@ -31,6 +31,12 @@
     <Filter Include="shaders">
       <UniqueIdentifier>{c4e8c887-34a5-4171-be55-5d0566259465}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{da2ca875-9c6d-4582-afa3-cdf55394d672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\models\obj">
+      <UniqueIdentifier>{9c5071b2-8e25-4091-99b7-bc009b69daba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assets\tiny_obj_loader.cc">
+      <Filter>assets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +200,15 @@
     <ClInclude Include="Asset3dCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="assets\Mesh.h">
+      <Filter>assets</Filter>
+    </ClInclude>
+    <ClInclude Include="assets\Model.h">
+      <Filter>assets</Filter>
+    </ClInclude>
+    <ClInclude Include="assets\tiny_obj_loader.h">
+      <Filter>assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll" />
@@ -223,5 +241,10 @@
     <Image Include="images\box.png">
       <Filter>Resource Files\images</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="models\obj\sphere.obj">
+      <Filter>Resource Files\models\obj</Filter>
+    </Resource>
   </ItemGroup>
 </Project>

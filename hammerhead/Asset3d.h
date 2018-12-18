@@ -2,14 +2,14 @@
 
 #pragma once
 #include <string>
-//#include "
+#include "assets/Model.h"
 using namespace std;
 
 class Asset3d {
 private:
 	string name;
 	string resource_name;
-	//Model* model;
+	Model* model;
 public:
 	Asset3d() {
 
@@ -26,12 +26,11 @@ public:
 		return this->resource_name;
 	}
 
-	/*
-	void set_texture(SDL_Texture* texture) {
-		this->texture = texture;
+	void set_model(Model* value) {
+		this->model = value;
 	}
 
-	SDL_Texture* get_texture() {
-		return this->texture;
-	}*/
+	Model* get_model() {
+		return this->model;
+	}
 };

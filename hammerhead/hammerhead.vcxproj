@@ -118,8 +118,9 @@
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)*.dll" "$(TargetDir)"
 mkdir "$(TargetDir)\images"
+mkdir "$(TargetDir)\models\obj"
 xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)\images"
-xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
+xcopy /y "$(ProjectDir)\models\obj\*.obj" "$(TargetDir)\models\obj"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy Required DLL to output</Message>
@@ -162,6 +163,7 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="assets\tiny_obj_loader.cc" />
     <ClCompile Include="CelestialBody.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -188,6 +190,9 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
   <ItemGroup>
     <ClInclude Include="Asset3d.h" />
     <ClInclude Include="Asset3dCollection.h" />
+    <ClInclude Include="assets\Mesh.h" />
+    <ClInclude Include="assets\Model.h" />
+    <ClInclude Include="assets\tiny_obj_loader.h" />
     <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Coord.h" />
@@ -254,6 +259,12 @@ xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)"</Command>
     <Image Include="images\planet-large.png" />
     <Image Include="images\planet.png" />
     <Image Include="images\ship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="models\obj\sphere.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
