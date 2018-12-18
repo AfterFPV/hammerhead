@@ -304,7 +304,7 @@ void GameEngine::draw() {
 
 	// Camera matrix
 	glm::mat4 View = glm::lookAt(
-		glm::vec3(4, 3, 10), // Camera is at (4,3,10), in World Space
+		glm::vec3(0, 0, 24), // Camera is at (4,3,10), in World Space
 		glm::vec3(0, 0, 0), // and looks at the origin
 		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
 	);
@@ -320,6 +320,11 @@ void GameEngine::draw() {
 	//glClearColor(0.0, 0.0, 0.0, 1.0);
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	space.set_matrices(Projection, View);
+	space.set_shader_program(this->shader_program);
+	space.draw_map();
+	
+	/*
 	float x_angle_radians = glm::radians((GLfloat)i * 1.0);
 	float y_angle_radians = glm::radians((GLfloat)i * 1.0);
 	float z_angle_radians = glm::radians((GLfloat)i * 0.5);
@@ -333,7 +338,7 @@ void GameEngine::draw() {
 
 
 	glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
-
+	*/
 	//Swap our buffers and make our changes visible
 	//SDL_GL_SwapWindow(this->window);
 

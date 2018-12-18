@@ -6,6 +6,12 @@
 #include <list>
 #include <math.h>
 #include <string>
+#include <GL/gl3w.h>
+#include <GL/glcorearb.h>
+#include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <SDL2/SDL.h>
 
 using namespace std;
@@ -21,12 +27,21 @@ protected:
 	Vector2 direction;
 	Vector2 size;
 	string name;
+	glm::vec3 rotation;
+	glm::mat4 projection;
+	glm::mat4 view;
+	GLuint shader_program;
 	SDL_Renderer* renderer;
 	list<GameTexture> textures;
 public:
 	GameObject(Coord pos, Coord center, Vector2 direction, Vector2 size) :
 		pos(pos), center(center), direction(direction), size(size), z_index(0), is_clickable(false) {
 		calculate_orientation();
+
+		rotation = glm::vec3();
+		rotation.x = 0.0f;
+		rotation.y = 0.0f;
+		rotation.z = 0.0f;
 	}
 
 	virtual void draw();
@@ -38,6 +53,8 @@ public:
 	string get_name();
 	void update_position();
 	void calculate_orientation();
+	void set_matrices(glm::mat4 projection, glm::mat4 view);
+	void set_shader_program(GLuint value);
 	void set_renderer(SDL_Renderer* value);
 	void add_texture(GameTexture texture);
 	void set_name(string name);

@@ -60,7 +60,7 @@ void SpaceObject::calculate_orbit_radius() {
 }
 
 void SpaceObject::draw() {
-	draw_orbit();
+	//draw_orbit();
 	GameObject::draw();
 }
 

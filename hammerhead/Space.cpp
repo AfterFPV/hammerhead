@@ -80,23 +80,34 @@ void Space::draw_grid() {
 	}
 }
 
+void Space::set_matrices(glm::mat4 projection, glm::mat4 view) {
+	this->projection = projection;
+	this->view = view;
+}
+
+void Space::set_shader_program(GLuint value) {
+	this->shader_program = value;
+}
+
 void Space::draw_map() {
 	//Clear draw area
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
+	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	//SDL_RenderClear(renderer);
 
-	SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+	//SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 
-	draw_grid();	
+	//draw_grid();	
 
 	//Draw objects in space
 	list<unique_ptr<SpaceObject>>::iterator it;
 	for (it = objs.begin(); it != objs.end(); it++) {
+		it->get()->set_matrices(this->projection, this->view);
+		it->get()->set_shader_program(this->shader_program);
 		it->get()->draw();
 	}
 
 	// Render the changes above
-	SDL_RenderPresent(renderer);
+	//SDL_RenderPresent(renderer);
 }
 
 void Space::print_list() {

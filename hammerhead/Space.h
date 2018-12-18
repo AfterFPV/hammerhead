@@ -6,6 +6,7 @@
 #include <iterator>
 #include <iostream>
 #include <memory>
+#include <glm/mat4x4.hpp>
 #include <SDL2/SDL.h>
 
 constexpr int MIN_SPACE_SIZE = 32;
@@ -23,6 +24,9 @@ private:
 	int row_count;
 	int column_count;
 	int tick_count;
+	glm::mat4 projection;
+	glm::mat4 view;
+	GLuint shader_program;
 	SDL_Renderer* renderer;
 	SpaceObject* selected_object;
 public:
@@ -34,6 +38,8 @@ public:
 	int get_tick_count();
 	void set_renderer(SDL_Renderer* value);
 	void set_window_size(int width, int height);
+	void set_matrices(glm::mat4 projection, glm::mat4 view);
+	void set_shader_program(GLuint value);
 	Space();
 	Space(int column_count, int row_count);
 private:
