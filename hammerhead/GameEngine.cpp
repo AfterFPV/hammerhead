@@ -102,6 +102,8 @@ void GameEngine::init_shaders() {
 	//Bind attribute index 0 (coordinates) to in_Position and attribute index 1 (color) to in_Color
 	glBindAttribLocation(shader_program, 0, "in_Position");
 	glBindAttribLocation(shader_program, 1, "in_Color");
+	glBindAttribLocation(shader_program, 2, "in_Normal");
+	glBindAttribLocation(shader_program, 3, "in_TextureCoord");
 
 	//Link our program
 	//At this stage, the vertex and fragment programs are inspected, optimized, and binary code is generated for the shader
@@ -290,18 +292,21 @@ void GameEngine::init_map() {
 	Coord sun_pos(320, 320);
 	float sun_radius = 50.0;
 	unique_ptr<SpaceObject> sun = CelestialBodyFactory::create_sun("Sun", sun_pos, sun_radius, assets.get_asset("sphere"), Color(251, 184, 41));
+	sun->set_rotation(glm::vec3(0, 0.01, 0));
 
 	Coord earth_pos(140, 140);
 	float earth_radius = 18.0;
 	unique_ptr<SpaceObject> earth = CelestialBodyFactory::create_planet("Earth", earth_pos, earth_radius, assets.get_asset("sphere"), Color(42, 143, 189));
 	Orbit* sun_orbit = new Orbit(sun.get(), 2);
 	earth->set_orbit(sun_orbit);
+	earth->set_rotation(glm::vec3(0, 0.05, 0));
 
 	Coord moon_pos(240, 240);
 	float moon_radius = 4.5;
 	unique_ptr<SpaceObject> moon = CelestialBodyFactory::create_moon("Moon", moon_pos, moon_radius, assets.get_asset("sphere"), Color(216, 216, 216));
 	Orbit* earth_orbit = new Orbit(earth.get(), 5);
 	moon->set_orbit(earth_orbit);
+	moon->set_rotation(glm::vec3(0, 0.10, 0));
 
 	Coord ship_pos(300, 300);
 	Vector2 ship_direction(1, 1);

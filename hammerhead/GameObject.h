@@ -29,6 +29,7 @@ protected:
 	Vector2 size;
 	string name;
 	glm::vec3 rotation;
+	glm::vec3 rotation_position;
 	glm::mat4 projection;
 	glm::mat4 view;
 	GLuint shader_program;
@@ -42,6 +43,11 @@ public:
 		rotation.x = 0.0f;
 		rotation.y = 0.0f;
 		rotation.z = 0.0f;
+
+		rotation_position = glm::vec3();
+		rotation_position.x = 0.0f;
+		rotation_position.y = 0.0f;
+		rotation_position.z = 0.0f;
 	}
 
 	virtual void draw();
@@ -53,6 +59,7 @@ public:
 	string get_name();
 	void update_position();
 	void calculate_orientation();
+	void set_rotation(glm::vec3 rotation);
 	void set_matrices(glm::mat4 projection, glm::mat4 view);
 	void set_shader_program(GLuint value);
 	void set_model(Model* model);

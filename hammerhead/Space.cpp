@@ -89,12 +89,6 @@ void Space::set_shader_program(GLuint value) {
 }
 
 void Space::draw_map() {
-	//Clear draw area
-	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	//SDL_RenderClear(renderer);
-
-	//SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
-
 	//draw_grid();	
 
 	//Draw objects in space
@@ -104,9 +98,6 @@ void Space::draw_map() {
 		it->get()->set_shader_program(this->shader_program);
 		it->get()->draw();
 	}
-
-	// Render the changes above
-	//SDL_RenderPresent(renderer);
 }
 
 void Space::print_list() {

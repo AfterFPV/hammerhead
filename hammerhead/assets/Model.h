@@ -220,7 +220,7 @@ public:
 	}
 
 	void init_mesh_buffers() {
-		std::string base_dir = get_base_dir(this->resource_name);
+		std::string base_dir = "models/obj/";
 		float bmin[3];
 		float bmax[3];
 
