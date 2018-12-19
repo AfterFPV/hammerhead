@@ -18,8 +18,7 @@ public:
 		unique_ptr<Ship> ship(new Ship(pos, center, direction, size, damage, range));
 		ship->set_name(name);
 
-		//GameTexture texture(asset.get_texture(), Coord(0, 0), size.x, size.y);
-		//ship->add_texture(texture);
+		ship->set_model(asset.get_model());
 
 		return move(ship);
 	}

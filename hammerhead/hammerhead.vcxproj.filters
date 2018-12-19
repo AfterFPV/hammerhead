@@ -87,6 +87,9 @@
     <ClCompile Include="assets\tiny_obj_loader.cc">
       <Filter>assets</Filter>
     </ClCompile>
+    <ClCompile Include="assets\stb_image.cc">
+      <Filter>assets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\..\..\Software\lib\SDL2\SDL2.dll" />
@@ -206,7 +209,7 @@
     <ClInclude Include="assets\tiny_obj_loader.h">
       <Filter>assets</Filter>
     </ClInclude>
-    <ClInclude Include="MeshBufferIndex.h">
+    <ClInclude Include="assets\stb_image.h">
       <Filter>assets</Filter>
     </ClInclude>
   </ItemGroup>

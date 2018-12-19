@@ -22,8 +22,7 @@ public:
 		planet->set_name(name);
 
 		float diameter = radius * 2;
-		//GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter, color);
-		//planet->add_texture(texture);
+		planet->set_model(asset.get_model());
 
 		return move(planet);
 	}
@@ -40,8 +39,7 @@ public:
 		moon->set_name(name);
 
 		float diameter = radius * 2;
-		//GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter, color);
-		//moon->add_texture(texture);
+		moon->set_model(asset.get_model());
 
 		return move(moon);
 	}
@@ -58,8 +56,7 @@ public:
 		sun->set_name(name);
 
 		float diameter = radius * 2;
-		//GameTexture texture(asset.get_texture(), Coord(0, 0), diameter, diameter, color);
-		//sun->add_texture(texture);
+		sun->set_model(asset.get_model());
 
 		return move(sun);
 	}

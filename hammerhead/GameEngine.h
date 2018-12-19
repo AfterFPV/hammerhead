@@ -48,5 +48,7 @@ private:
 	void init_assets();
 	void init_space();
 	void init_map();
+	void init_shaders();
+	void bind_models();
 	char* file_read(const char* filename);
 };

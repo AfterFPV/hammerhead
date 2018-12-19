@@ -37,6 +37,50 @@ void GameObject::set_shader_program(GLuint value) {
 }
 
 void GameObject::draw() {
+	for (size_t i = 0; i < this->model->get_draw_objects().size(); i++) {
+		DrawObject o = this->model->get_draw_objects()[i];
+		if (o.vao_id < 1) {
+			continue;
+		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
+
+		glm::mat4 identity_matrix = glm::mat4(1.0);
+		glm::mat4 model_matrix;
+		glm::vec3 x_axis(1, 0, 0);
+		glm::vec3 y_axis(0, 1, 0);
+		glm::vec3 z_axis(0, 0, 1);
+
+		float scaling_factor_x = 0.001 * this->size.x;
+		float scaling_factor_y = 0.001 * this->size.y;
+		float scaling_factor_z = scaling_factor_x;
+
+		glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
+		glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
+
+		glm::vec3 translation_vector(this->pos.get_floatX() * 0.01, this->pos.get_floatY() * 0.01, 0);
+		glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
+
+		float x_angle_radians = this->rotation.x;
+		float y_angle_radians = this->rotation.y;
+		float z_angle_radians = this->rotation.z;
+
+		glm::mat4 rotation_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
+		rotation_matrix = glm::rotate(rotation_matrix, y_angle_radians, y_axis);
+		rotation_matrix = glm::rotate(rotation_matrix, z_angle_radians, z_axis);
+
+		model_matrix = translation_matrix * rotation_matrix * scaling_matrix;
+
+		glm::mat4 mvp = this->projection * this->view * model_matrix;
+		glUniformMatrix4fv(glGetUniformLocation(this->shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
+
+
+		glDrawArrays(GL_TRIANGLES, 0, o.num_triangles);
+	}
+}
+
+/*
+void GameObject::draw() {
 	glm::mat4 identity_matrix = glm::mat4(1.0);
 	glm::mat4 model_matrix;
 	glm::vec3 x_axis(1, 0, 0);
@@ -69,6 +113,7 @@ void GameObject::draw() {
 
 	glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
 }
+*/
 
 /*
 void GameObject::draw() {
@@ -121,8 +166,8 @@ void GameObject::set_renderer(SDL_Renderer* value) {
 	this->renderer = value;
 }*/
 
-void GameObject::add_model(Model* model) {
-	models.push_back(model);
+void GameObject::set_model(Model* model) {
+	this->model = model;
 }
 
 void GameObject::set_name(string name) {

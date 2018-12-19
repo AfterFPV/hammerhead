@@ -94,7 +94,12 @@ public:
 	}
 
 	void bind_models() {
+		map<string, Asset3d>::iterator it;
 
+		for (it = assets.begin(); it != assets.end(); it++)
+		{
+			it->second.get_model()->init_mesh_buffers();
+		}
 	}
 
 	Asset3d& get_asset(string name) {

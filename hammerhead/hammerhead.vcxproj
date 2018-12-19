@@ -165,6 +165,7 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="assets\stb_image.cc" />
     <ClCompile Include="assets\tiny_obj_loader.cc" />
     <ClCompile Include="CelestialBody.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -193,8 +194,8 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="Asset3d.h" />
     <ClInclude Include="Asset3dCollection.h" />
     <ClInclude Include="assets\Model.h" />
+    <ClInclude Include="assets\stb_image.h" />
     <ClInclude Include="assets\tiny_obj_loader.h" />
-    <ClInclude Include="MeshBufferIndex.h" />
     <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Coord.h" />
