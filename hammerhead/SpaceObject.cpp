@@ -66,10 +66,12 @@ void SpaceObject::draw() {
 
 void SpaceObject::draw_orbit() {
 	if (is_in_orbit()) {
+		/*
 		int orbit_x = this->orbit->get_body()->get_center().get_intX();
 		int orbit_y = this->orbit->get_body()->get_center().get_intY();
 		int orbit_radius = this->orbit->get_radius();
 
-		SdlPrimatives::draw_circle(this->renderer, orbit_x, orbit_y, orbit_radius, this->orbit_color);		
+		SdlPrimatives::draw_circle(this->renderer, orbit_x, orbit_y, orbit_radius, this->orbit_color);	
+		*/
 	}
 }

@@ -116,12 +116,13 @@ void GameObject::draw() {
 	}
 }*/
 
+/*
 void GameObject::set_renderer(SDL_Renderer* value) {
 	this->renderer = value;
-}
+}*/
 
-void GameObject::add_texture(GameTexture texture) {
-	textures.push_back(texture);
+void GameObject::add_model(Model* model) {
+	models.push_back(model);
 }
 
 void GameObject::set_name(string name) {

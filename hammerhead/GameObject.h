@@ -2,6 +2,7 @@
 #include "Coord.h"
 #include "Vector2.h"
 #include "GameTexture.h"
+#include "assets/Model.h"
 #include <iterator>
 #include <list>
 #include <math.h>
@@ -31,8 +32,8 @@ protected:
 	glm::mat4 projection;
 	glm::mat4 view;
 	GLuint shader_program;
-	SDL_Renderer* renderer;
-	list<GameTexture> textures;
+	list<Model*> models;
+	//SDL_Renderer* renderer;
 public:
 	GameObject(Coord pos, Coord center, Vector2 direction, Vector2 size) :
 		pos(pos), center(center), direction(direction), size(size), z_index(0), is_clickable(false) {
@@ -55,8 +56,8 @@ public:
 	void calculate_orientation();
 	void set_matrices(glm::mat4 projection, glm::mat4 view);
 	void set_shader_program(GLuint value);
-	void set_renderer(SDL_Renderer* value);
-	void add_texture(GameTexture texture);
+	//void set_renderer(SDL_Renderer* value);
+	void add_model(Model* model);
 	void set_name(string name);
 	void set_direction(Vector2 direction);
 	void set_z_index(int value);

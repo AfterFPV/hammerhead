@@ -200,13 +200,13 @@
     <ClInclude Include="Asset3dCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="assets\Mesh.h">
-      <Filter>assets</Filter>
-    </ClInclude>
     <ClInclude Include="assets\Model.h">
       <Filter>assets</Filter>
     </ClInclude>
     <ClInclude Include="assets\tiny_obj_loader.h">
+      <Filter>assets</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshBufferIndex.h">
       <Filter>assets</Filter>
     </ClInclude>
   </ItemGroup>

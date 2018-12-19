@@ -122,7 +122,7 @@ void GameEngine::init() {
 	//Allocate and assign a vertex array object to our handle
 	glGenVertexArrays(1, &vao);
 
-	//Bind our vertext array object as the current used object
+	//Bind our vertex array object as the current used object
 	glBindVertexArray(vao);
 
 	//Allocate and assign to vertex buffer object to our handle
@@ -135,6 +135,8 @@ void GameEngine::init() {
 	// 8 * sizeof(GLfloat) is the size of the diamond array since it contains 8 GLfloat values
 	//glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(GLfloat), diamond, GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+	//glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
 	//Specify that our coordinate data is going into attribute index 0, and contains three floats per vertex
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);

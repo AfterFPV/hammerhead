@@ -93,6 +93,10 @@ public:
 		return m;
 	}
 
+	void bind_models() {
+
+	}
+
 	Asset3d& get_asset(string name) {
 		return assets[name];
 	}

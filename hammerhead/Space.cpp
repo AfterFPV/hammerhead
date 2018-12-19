@@ -42,8 +42,7 @@ int Space::get_tick_count() {
 	return this->tick_count;
 }
 
-void Space::add_object(unique_ptr<SpaceObject> obj) {
-	obj->set_renderer(this->renderer);
+void Space::add_object(unique_ptr<SpaceObject> obj) {	
 	objs.push_back(move(obj));
 }
 
