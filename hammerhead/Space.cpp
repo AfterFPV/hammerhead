@@ -56,6 +56,11 @@ void Space::set_window_size(int width, int height) {
 
 	this->tile_width = width / this->column_count;
 	this->tile_height = height / this->row_count;
+
+	list<unique_ptr<SpaceObject>>::iterator it;
+	for (it = objs.begin(); it != objs.end(); it++) {
+		it->get()->set_window_size(glm::vec2(this->window_width, this->window_height));		
+	}
 }
 
 void Space::draw_grid() {

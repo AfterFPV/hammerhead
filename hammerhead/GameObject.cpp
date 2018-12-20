@@ -28,6 +28,12 @@ void GameObject::set_direction(Vector2 direction) {
 	calculate_orientation();
 }
 
+void GameObject::set_window_size(glm::vec2 window_size) {
+	this->window_size = window_size;
+
+	this->window_offset = glm::vec2(-(this->window_size.x / 2), -(this->window_size.y / 2));
+}
+
 void GameObject::set_rotation(glm::vec3 rotation) {
 	this->rotation = rotation;
 }
@@ -48,6 +54,8 @@ void GameObject::draw() {
 			continue;
 		}
 
+		glm::vec3 scaling_factor = this->model->get_normalized_scaling_factor();
+
 		glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
 
 		glm::mat4 identity_matrix = glm::mat4(1.0);
@@ -56,14 +64,16 @@ void GameObject::draw() {
 		glm::vec3 y_axis(0, 1, 0);
 		glm::vec3 z_axis(0, 0, 1);
 
-		float scaling_factor_x = 0.001 * this->size.x;
-		float scaling_factor_y = 0.001 * this->size.y;
+		float scaling_factor_x = scaling_factor.x * this->size.x;
+		float scaling_factor_y = scaling_factor.y * this->size.y;
 		float scaling_factor_z = scaling_factor_x;
 
 		glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
 		glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
 
-		glm::vec3 translation_vector(this->pos.get_floatX() * 0.01, this->pos.get_floatY() * 0.01, 0);
+		float z_pos_3d = this->pos.get_floatY();
+		glm::vec3 translation_vector(this->pos.get_floatX(), 0, z_pos_3d);
+		//glm::vec3 translation_vector(this->pos.get_floatX() + this->window_offset.x, this->pos.get_floatY() + this->window_offset.y, 0);
 		glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 
 		float x_angle_radians = this->rotation_position.x;

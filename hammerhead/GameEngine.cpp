@@ -167,102 +167,20 @@ char* GameEngine::file_read(const char* filename) {
 }
 
 void GameEngine::draw() {
-
-	glm::mat4 model_matrix;
-	//glm::mat4 identity_matrix;
-
-	//Create our projections matrix with a 45 degree field of view
-	//a width-to-height ratio of 1.0 and view from .1 to 100 in front of us
-	glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), 1920.0f / 1200.0f, 0.1f, 100.0f);
-	//glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0), 1.0, 0.1, 100.0);
-
-
-	//Loop our display rotating our model more each time
-	glm::vec3 x_axis(1, 0, 0);
-	glm::vec3 y_axis(0, 1, 0);
-	glm::vec3 z_axis(0, 0, 1);
-
-	glm::mat4 identity_matrix = glm::mat4(1.0);
-
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
+	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 2000.0f);
 
 	// Camera matrix
 	glm::mat4 View = glm::lookAt(
-		glm::vec3(0, 0, 24), // Camera is at (4,3,10), in World Space
+		glm::vec3(0, 200, -900), // Camera is at (4,3,10), in World Space
 		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+		glm::vec3(0, 1, 1)  // Head is up (set to 0,-1,0 to look upside-down)
 	);
-
-	// Model matrix : an identity matrix (model will be at the origin)
-	glm::mat4 Model = glm::mat4(1.0f);
-
-	int i = space.get_tick_count();
 
 	space.set_matrices(Projection, View);
 	space.set_shader_program(this->shader_program);
 	space.draw_map();
 }
-
-/*
-
-void GameEngine::draw() {
-	
-	glm::mat4 model_matrix;
-	//glm::mat4 identity_matrix;
-
-	//Create our projections matrix with a 45 degree field of view
-	//a width-to-height ratio of 1.0 and view from .1 to 100 in front of us
-	glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), 1920.0f / 1200.0f, 0.1f, 100.0f);
-	//glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0), 1.0, 0.1, 100.0);
-
-
-	//Loop our display rotating our model more each time
-	glm::vec3 x_axis(1, 0, 0);
-	glm::vec3 y_axis(0, 1, 0);
-	glm::vec3 z_axis(0, 0, 1);
-
-	glm::mat4 identity_matrix = glm::mat4(1.0);
-
-	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
-
-	// Camera matrix
-	glm::mat4 View = glm::lookAt(
-		glm::vec3(4, 3, 10), // Camera is at (4,3,10), in World Space
-		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-	);
-
-	// Model matrix : an identity matrix (model will be at the origin)
-	glm::mat4 Model = glm::mat4(1.0f);
-
-	int i = space.get_tick_count();
-
-
-	//Load the identity matrix into model matrix, rotate the model, and move it back by 5
-	//memcpy(model_matrix, identity_matrix, sizeof(GLfloat) * 16);
-	//glClearColor(0.0, 0.0, 0.0, 1.0);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	float x_angle_radians = glm::radians((GLfloat)i * 1.0);
-	float y_angle_radians = glm::radians((GLfloat)i * 1.0);
-	float z_angle_radians = glm::radians((GLfloat)i * 0.5);
-
-	model_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
-	model_matrix = glm::rotate(model_matrix, y_angle_radians, y_axis);
-	model_matrix = glm::rotate(model_matrix, z_angle_radians, z_axis);
-
-	glm::mat4 mvp = Projection * View * model_matrix;
-	glUniformMatrix4fv(glGetUniformLocation(shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
-
-
-	glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
-
-	//Swap our buffers and make our changes visible
-	//SDL_GL_SwapWindow(this->window);
-	
-}*/
 
 void GameEngine::stop() {
 	//Cleanup all the things we bound and allocated
@@ -289,28 +207,28 @@ void GameEngine::set_vertex_shader_source(string value) {
 }
 
 void GameEngine::init_map() {
-	Coord sun_pos(320, 320);
+	Coord sun_pos(0, 0);
 	float sun_radius = 50.0;
 	unique_ptr<SpaceObject> sun = CelestialBodyFactory::create_sun("Sun", sun_pos, sun_radius, assets.get_asset("sphere"), Color(251, 184, 41));
 	sun->set_rotation(glm::vec3(0, 0.01, 0));
 
-	Coord earth_pos(140, 140);
+	Coord earth_pos(280, 0);
 	float earth_radius = 18.0;
 	unique_ptr<SpaceObject> earth = CelestialBodyFactory::create_planet("Earth", earth_pos, earth_radius, assets.get_asset("sphere"), Color(42, 143, 189));
 	Orbit* sun_orbit = new Orbit(sun.get(), 2);
 	earth->set_orbit(sun_orbit);
 	earth->set_rotation(glm::vec3(0, 0.05, 0));
 
-	Coord moon_pos(240, 240);
+	Coord moon_pos(380, 0);
 	float moon_radius = 4.5;
 	unique_ptr<SpaceObject> moon = CelestialBodyFactory::create_moon("Moon", moon_pos, moon_radius, assets.get_asset("sphere"), Color(216, 216, 216));
 	Orbit* earth_orbit = new Orbit(earth.get(), 5);
 	moon->set_orbit(earth_orbit);
 	moon->set_rotation(glm::vec3(0, 0.10, 0));
 
-	Coord ship_pos(300, 300);
+	Coord ship_pos(0, 0);
 	Vector2 ship_direction(1, 1);
-	Vector2 ship_size(8, 8);
+	Vector2 ship_size(20, 20);
 	unique_ptr<Ship> ship = ShipFactory::create("intrepid", ship_pos, ship_size, assets.get_asset("ship-1"));
 	ship->set_direction(ship_direction);
 
@@ -318,6 +236,8 @@ void GameEngine::init_map() {
 	space.add_object(move(earth));
 	space.add_object(move(moon));
 	space.add_object(move(ship));
+
+	space.set_window_size(window_width, window_height);
 }
 
 void GameEngine::tick() {

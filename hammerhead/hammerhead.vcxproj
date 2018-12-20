@@ -199,12 +199,11 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Coord.h" />
-    <ClInclude Include="DisplayAsset.h" />
-    <ClInclude Include="DisplayAssets.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameTexture.h" />
+    <ClInclude Include="GlPrimatives.h" />
     <ClInclude Include="GL\gl3w.h" />
     <ClInclude Include="GL\glcorearb.h" />
     <ClInclude Include="imconfig.h" />
@@ -215,8 +214,6 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
-    <ClInclude Include="ModelAsset.h" />
-    <ClInclude Include="ModelAssets.h" />
     <ClInclude Include="Moon.h" />
     <ClInclude Include="Orbit.h" />
     <ClInclude Include="Window.h" />

@@ -1,6 +1,5 @@
 #pragma once
 #include "CelestialBody.h"
-#include "DisplayAssets.h"
 
 class Planet : public CelestialBody {
 public:

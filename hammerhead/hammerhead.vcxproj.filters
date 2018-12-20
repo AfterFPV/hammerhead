@@ -116,12 +116,6 @@
     <ClInclude Include="Planet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DisplayAsset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DisplayAssets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CelestialBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -191,12 +185,6 @@
     <ClInclude Include="GL\glcorearb.h">
       <Filter>gl3w</Filter>
     </ClInclude>
-    <ClInclude Include="ModelAsset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelAssets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Asset3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -211,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="assets\stb_image.h">
       <Filter>assets</Filter>
+    </ClInclude>
+    <ClInclude Include="GlPrimatives.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

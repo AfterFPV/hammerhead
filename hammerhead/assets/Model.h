@@ -63,7 +63,7 @@ class Model
 {
 public:
 	Model(string name, string resource_name, attrib_t&& attrib, vector<shape_t>&& shapes, vector<material_t>&& materials) : name(name), resource_name(resource_name), attrib(attrib), shapes(shapes), materials(materials) {
-		
+		this->normalized_scaling_factor = glm::vec3(1.0f, 1.0f, 1.0f);
 	}
 
 	string get_name() {
@@ -217,6 +217,10 @@ public:
 		if (filepath.find_last_of("/\\") != std::string::npos)
 			return filepath.substr(0, filepath.find_last_of("/\\"));
 		return "";
+	}
+
+	glm::vec3 get_normalized_scaling_factor() {
+		return this->normalized_scaling_factor;
 	}
 
 	void init_mesh_buffers() {
@@ -454,17 +458,9 @@ public:
 				}
 
 				for (int k = 0; k < 3; k++) {
-					//buffer.push_back(v[k][0]);
-					//buffer.push_back(v[k][1]);
-					//buffer.push_back(v[k][2]);
-
 					v_positions.push_back(v[k][0]);
 					v_positions.push_back(v[k][1]);
 					v_positions.push_back(v[k][2]);
-
-					//buffer.push_back(n[k][0]);
-					//buffer.push_back(n[k][1]);
-					//buffer.push_back(n[k][2]);
 
 					v_normals.push_back(n[k][0]);
 					v_normals.push_back(n[k][1]);
@@ -483,16 +479,10 @@ public:
 						c[1] /= len;
 						c[2] /= len;
 					}
-					//buffer.push_back(c[0] * 0.5 + 0.5);
-					//buffer.push_back(c[1] * 0.5 + 0.5);
-					//buffer.push_back(c[2] * 0.5 + 0.5);
 
 					v_colors.push_back(c[0] * 0.5 + 0.5);
 					v_colors.push_back(c[1] * 0.5 + 0.5);
 					v_colors.push_back(c[2] * 0.5 + 0.5);
-
-					//buffer.push_back(tc[k][0]);
-					//buffer.push_back(tc[k][1]);
 
 					v_texture_coords.push_back(tc[k][0]);
 					v_texture_coords.push_back(tc[k][1]);
@@ -513,20 +503,7 @@ public:
 			}
 			printf("shape[%d] material_id %d\n", int(s), int(o.material_id));
 
-			/*
-						if (buffer.size() > 0) {
-				glGenBuffers(1, &o.vao_id);
-				glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
-				glBufferData(GL_ARRAY_BUFFER, buffer.size() * sizeof(float),
-					&buffer.at(0), GL_STATIC_DRAW);
-				o.num_triangles = buffer.size() / (3 + 3 + 3 + 2) /
-					3;  // 3:vtx, 3:normal, 3:col, 2:texcoord
-
-				printf("shape[%d] # of triangles = %d\n", static_cast<int>(s),
-					o.num_triangles);
-			}*/
-
-			//Fix: instead of large buffer with offsets, setup vao and child buffers
+			//Setup vao and child buffers
 			if (v_positions.size() > 0) {
 				//Allocate and assign a vertex array object to our handle
 				glGenVertexArrays(1, &o.vao_id);
@@ -571,15 +548,29 @@ public:
 
 				this->draw_objects.push_back(o);
 			}
-		}		
+		}	
+
+		min_vertex_values = glm::vec3(bmin[0], bmin[1], bmin[2]);
+		max_vertex_values = glm::vec3(bmax[0], bmax[1], bmax[2]);
+
+		//Set value to uniformly scale off relative x size;
+		float delta_x = max_vertex_values.x - min_vertex_values.x;
+		if (delta_x > 0) {
+			float factor_x = 1.0f / delta_x;
+			normalized_scaling_factor = glm::vec3(factor_x, factor_x, factor_x);
+		}
 	}
 private:
+
+	string name;
 	string resource_name;
+	glm::vec3 min_vertex_values;
+	glm::vec3 max_vertex_values;
+	glm::vec3 normalized_scaling_factor;
 	attrib_t attrib;
 	vector<shape_t> shapes;
 	vector<material_t> materials;
-	map<string, GLuint> textures;
 	vector<DrawObject> draw_objects;
-	string name;
+	map<string, GLuint> textures;
 };
 

@@ -13,7 +13,6 @@
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <SDL2/SDL.h>
 
 using namespace std;
 
@@ -26,8 +25,10 @@ protected:
 	float orientation;
 	float orientation_degrees;
 	Vector2 direction;
-	Vector2 size;
+	Vector2 size;	
 	string name;
+	glm::vec2 window_size;
+	glm::vec2 window_offset;
 	glm::vec3 rotation;
 	glm::vec3 rotation_position;
 	glm::mat4 projection;
@@ -59,6 +60,7 @@ public:
 	string get_name();
 	void update_position();
 	void calculate_orientation();
+	void set_window_size(glm::vec2 window_size);
 	void set_rotation(glm::vec3 rotation);
 	void set_matrices(glm::mat4 projection, glm::mat4 view);
 	void set_shader_program(GLuint value);
