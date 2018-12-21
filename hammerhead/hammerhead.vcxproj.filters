@@ -203,6 +203,9 @@
     <ClInclude Include="GlPrimatives.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DrawObject.h">
+      <Filter>assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll" />

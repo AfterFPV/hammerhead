@@ -13,6 +13,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "DrawObject.h"
 #include "tiny_obj_loader.h"
 #include "stb_image.h"
 
@@ -39,15 +40,7 @@ extern "C" {
 using namespace std;
 using namespace tinyobj;
 
-typedef struct {
-	GLuint vao_id;  // vertex array object id
-	GLuint position_vbo;
-	GLuint texture_coord_vbo;
-	GLuint normal_vbo;
-	GLuint color_vbo;
-	int num_triangles;
-	size_t material_id;
-} DrawObject;
+
 
 
 struct vec3 {

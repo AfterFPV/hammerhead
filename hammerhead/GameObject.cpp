@@ -56,7 +56,8 @@ void GameObject::draw() {
 
 		glm::vec3 scaling_factor = this->model->get_normalized_scaling_factor();
 
-		glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
+		glBindVertexArray(o.vao_id);
+		//glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
 
 		glm::mat4 identity_matrix = glm::mat4(1.0);
 		glm::mat4 model_matrix;
@@ -88,7 +89,6 @@ void GameObject::draw() {
 
 		glm::mat4 mvp = this->projection * this->view * model_matrix;
 		glUniformMatrix4fv(glGetUniformLocation(this->shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
-
 
 		glDrawArrays(GL_TRIANGLES, 0, o.num_triangles);
 	}

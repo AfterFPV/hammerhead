@@ -28,4 +28,5 @@ public:
 	void draw_orbit();
 	bool is_in_orbit();
 	void update_orbit();
+	void register_orbit_draw_objects();
 };

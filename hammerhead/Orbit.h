@@ -1,5 +1,7 @@
 #pragma once
 #include "SpaceObject.h"
+#include "Color.h"
+#include "GlPrimatives.h"
 
 class SpaceObject;
 
@@ -15,6 +17,7 @@ private:
 	float y;
 	int steps_per_rotation = 1000;
 	SpaceObject* body;
+	vector<DrawObject> draw_objects;
 public:
 	Orbit() : speed(0), radius(0), body(nullptr) {
 
@@ -69,6 +72,11 @@ public:
 		return this->abs_center_y;
 	}
 
+	const vector<DrawObject>& get_draw_objects() const {
+		return this->draw_objects;
+	}
+
+	void register_draw_objects();
 	void update_phase();
 	void calculate_position();
 	void set_phase(float value);

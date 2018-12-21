@@ -199,6 +199,7 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Coord.h" />
+    <ClInclude Include="DrawObject.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
