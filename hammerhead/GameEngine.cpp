@@ -13,6 +13,96 @@ void GameEngine::init_assets() {
 	assets.setup_models();
 }
 
+void GameEngine::init_settings() {
+	this->show_axes = true;
+	this->is_camera_moving = false;
+	this->is_camera_panning = false;
+
+	this->invert_pan = false;
+	this->pan_speed = 1.0f;
+	this->pan_factor = 1.0f;
+}
+
+void GameEngine::input_camera_move_start()
+{
+	this->is_camera_moving = true;
+	this->is_camera_panning = false;
+}
+
+void GameEngine::input_camera_move_end()
+{
+	this->is_camera_moving = false;
+	this->is_camera_panning = false;
+}
+
+void GameEngine::input_camera_pan_start()
+{
+	this->is_camera_moving = true;
+	this->is_camera_panning = true;
+}
+
+void GameEngine::input_camera_pan_end()
+{
+	this->is_camera_moving = false;
+	this->is_camera_panning = false;
+}
+
+void GameEngine::input_camera_zoom_in()
+{
+	this->camera.zoom_in();
+	this->calculate_pan_factor();
+}
+
+void GameEngine::input_camera_zoom_out()
+{
+	this->camera.zoom_out();
+	this->calculate_pan_factor();
+}
+
+void GameEngine::input_move(float x, float y, float delta_x, float delta_y) {
+	if (this->is_camera_panning) {
+		glm::vec3 camera_position = this->camera.get_position();
+		glm::vec3 camera_look_at = this->camera.get_look_at();
+
+		this->camera.set_position(glm::vec3(camera_position.x + (this->pan_factor * delta_x), camera_position.y, camera_position.z + (this->pan_factor * delta_y)));
+		this->camera.set_look_at(glm::vec3(camera_look_at.x + (this->pan_factor * delta_x), camera_look_at.y, camera_look_at.z + (this->pan_factor * delta_y)));
+	}
+	else if (this->is_camera_moving) {
+		glm::vec3 camera_position = this->camera.get_position();
+
+		this->camera.set_position(glm::vec3(camera_position.x + (this->pan_factor * delta_x), camera_position.y, camera_position.z + (this->pan_factor * delta_y)));
+	}
+}
+
+void GameEngine::set_invert_pan(bool value)
+{
+	this->invert_pan = value;
+	calculate_pan_factor();
+}
+
+void GameEngine::init_camera()
+{
+	this->camera = Camera();
+
+	this->camera.set_aspect_width(this->window_width);
+	this->camera.set_aspect_height(this->window_height);
+	
+
+	this->orientation_axes = OrientationAxes();
+	this->orientation_axes.set_camera(this->camera);
+}
+
+void GameEngine::update_camera()
+{
+	this->camera.calculate_matrices();
+	space.set_matrices(this->camera.get_projection(), this->camera.get_view());
+
+	if (this->show_axes) {
+		this->orientation_axes.set_camera(this->camera);
+		this->orientation_axes.update();
+	}
+}
+
 void GameEngine::init_space() {
 	this->space = Space(SPACE_SIZE, SPACE_SIZE);
 
@@ -21,6 +111,72 @@ void GameEngine::init_space() {
 
 void GameEngine::bind_models() {
 	assets.bind_models();
+}
+
+void GameEngine::calculate_pan_factor()
+{
+	if (this->invert_pan) {
+		this->pan_factor = -1.0f * this->pan_speed;
+	}
+	else {
+		this->pan_factor = this->pan_speed;
+	}
+
+	this->pan_factor = this->pan_factor * (1.0f / this->camera.get_zoom());
+}
+
+void GameEngine::draw_axes()
+{
+	this->orientation_axes.draw();
+	/*
+	glColor3f(1.0, 0.0, 0.0); // red x
+	glBegin(GL_LINES);
+	// x aix
+
+	glVertex3f(-4.0, 0.0f, 0.0f);
+	glVertex3f(4.0, 0.0f, 0.0f);
+
+	// arrow
+	glVertex3f(4.0, 0.0f, 0.0f);
+	glVertex3f(3.0, 1.0f, 0.0f);
+
+	glVertex3f(4.0, 0.0f, 0.0f);
+	glVertex3f(3.0, -1.0f, 0.0f);
+	glEnd();
+	glFlush();
+
+
+
+	// y 
+	glColor3f(0.0, 1.0, 0.0); // green y
+	glBegin(GL_LINES);
+	glVertex3f(0.0, -4.0f, 0.0f);
+	glVertex3f(0.0, 4.0f, 0.0f);
+
+	// arrow
+	glVertex3f(0.0, 4.0f, 0.0f);
+	glVertex3f(1.0, 3.0f, 0.0f);
+
+	glVertex3f(0.0, 4.0f, 0.0f);
+	glVertex3f(-1.0, 3.0f, 0.0f);
+	glEnd();
+	glFlush();
+
+	// z 
+	glColor3f(0.0, 0.0, 1.0); // blue z
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0f, -4.0f);
+	glVertex3f(0.0, 0.0f, 4.0f);
+
+	// arrow
+	glVertex3f(0.0, 0.0f, 4.0f);
+	glVertex3f(0.0, 1.0f, 3.0f);
+
+	glVertex3f(0.0, 0.0f, 4.0f);
+	glVertex3f(0.0, -1.0f, 3.0f);
+	glEnd();
+	glFlush();
+	*/
 }
 
 void GameEngine::init_shaders() {
@@ -134,8 +290,16 @@ void GameEngine::init_shaders() {
 	glUseProgram(shader_program);
 }
 
-void GameEngine::init() {
+void GameEngine::update() {
+	space.tick();
+	this->update_camera();
+}
+
+void GameEngine::init()
+{
+	init_settings();
 	init_assets();
+	init_camera();
 	init_space();
 	init_map();
 	bind_models();
@@ -167,22 +331,15 @@ char* GameEngine::file_read(const char* filename) {
 }
 
 void GameEngine::draw() {
-	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 2000.0f);
-
-	// Camera matrix
-	glm::mat4 View = glm::lookAt(
-		glm::vec3(0, 200, -900), // Camera is at (4,3,10), in World Space
-		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, 1, 1)  // Head is up (set to 0,-1,0 to look upside-down)
-	);
-
-	space.set_matrices(Projection, View);
 	space.set_shader_program(this->shader_program);
 	space.draw_map();
+
+	if (this->show_axes) {
+		draw_axes();
+	}
 }
 
-void GameEngine::stop() {
+void GameEngine::dispose() {
 	//Cleanup all the things we bound and allocated
 	glUseProgram(0);
 	glDisableVertexAttribArray(0);
@@ -196,6 +353,17 @@ void GameEngine::stop() {
 	//glDeleteVertexArrays(1, &vao);
 	//free(vertex_source);
 	//free(fragment_source);
+}
+
+void GameEngine::set_show_axes(bool value)
+{
+	this->show_axes = value;
+}
+
+void GameEngine::set_pan_speed(float value)
+{
+	this->pan_speed = value;
+	calculate_pan_factor();
 }
 
 void GameEngine::set_fragment_shader_source(string value) {
@@ -238,8 +406,4 @@ void GameEngine::init_map() {
 	space.add_object(move(ship));
 
 	space.set_window_size(window_width, window_height);
-}
-
-void GameEngine::tick() {
-	space.tick();
 }

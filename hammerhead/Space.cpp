@@ -145,28 +145,3 @@ void Space::draw_selected() {
 	}
 }
 
-void Space::update_orbit(CelestialBody &obj) {
-
-	float radius;
-	const float PI = 3.14159;
-	Coord center = obj.get_center();
-	int x, y;
-	float cent_x, cent_y;
-	float tmp_x, tmp_y;
-
-	cent_x = center.get_floatX();
-	cent_y = center.get_floatY();
-	radius = obj.get_radius();
-
-	for (float angle = 0; angle <= 2 * PI; angle += 0.01) {
-
-		tmp_x = cent_x + (radius * cos(angle));
-		tmp_y = cent_y + (radius * sin(angle));
-
-		x = (int)tmp_x;
-		y = (int)tmp_y;
-
-		two_d[x][y] = '-';
-	}
-
-}

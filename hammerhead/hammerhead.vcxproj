@@ -196,6 +196,7 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="assets\Model.h" />
     <ClInclude Include="assets\stb_image.h" />
     <ClInclude Include="assets\tiny_obj_loader.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CelestialBody.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Coord.h" />
@@ -217,11 +218,11 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="Moon.h" />
     <ClInclude Include="Orbit.h" />
+    <ClInclude Include="OrientationAxes.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="CelestialBodyFactory.h" />
-    <ClInclude Include="SdlPrimatives.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipFactory.h" />
     <ClInclude Include="Space.h" />

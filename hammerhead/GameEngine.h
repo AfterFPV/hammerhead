@@ -11,7 +11,9 @@
 
 #include "Asset3d.h"
 #include "Asset3dCollection.h"
+#include "Camera.h"
 #include "CelestialBodyFactory.h"
+#include "OrientationAxes.h"
 #include "Ship.h"
 #include "ShipFactory.h"
 #include "Space.h"
@@ -24,31 +26,53 @@ class GameEngine {
 public:
 	GameEngine();
 	GameEngine(SDL_Window* window, int window_width, int window_height);
+	void update();
 	void init();
 	void draw();
-	void tick();
-	void stop();
+	void dispose();
+	void input_camera_move_start();
+	void input_camera_move_end();
+	void input_camera_pan_start();
+	void input_camera_pan_end();
+	void input_camera_zoom_in();
+	void input_camera_zoom_out();
+	void input_move(float x, float y, float delta_x, float delta_y);
+	void set_invert_pan(bool value);
+	void set_show_axes(bool value);
+	void set_pan_speed(float value);
 	void set_vertex_shader_source(string value);
 	void set_fragment_shader_source(string value);
 private:
 	Asset3dCollection assets;
 	Space space;
+	Camera camera;
+	OrientationAxes orientation_axes;
 	int window_width;
 	int window_height;
+	bool invert_pan;
+	bool show_axes;
+	bool is_camera_moving;
+	bool is_camera_panning;
+	bool is_camera_zooming;
+	float pan_speed;
+	float pan_factor;
 	string vertex_shader_source;
 	string fragment_shader_source;
 	GLuint vertex_shader;
 	GLuint fragment_shader;
 	GLuint shader_program;
-	GLuint vao;
-	GLuint vbo[2];
 	SDL_Window* window;
 	GLchar* vertex_source;
 	GLchar* fragment_source;
+	void bind_models();
+	void calculate_pan_factor();
+	void draw_axes();
 	void init_assets();
+	void init_camera();
 	void init_space();
 	void init_map();
 	void init_shaders();
-	void bind_models();
+	void init_settings();
+	void update_camera();
 	char* file_read(const char* filename);
 };

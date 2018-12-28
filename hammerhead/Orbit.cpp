@@ -28,7 +28,7 @@ void Orbit::register_draw_objects() {
 	int line_segments = 64;
 	float line_width = 4.0f;
 	float circle_radius = this->radius; //circle uses radius of 1. Will scale to set radius at draw time
-	DrawObject o = GlPrimatives::register_circle(this->abs_center_x, this->abs_center_x, circle_radius, line_width, orbit_color, line_segments);
+	DrawObject o = GlPrimatives::register_circle(0.0f, 0.0f, circle_radius, line_width, orbit_color, line_segments);
 
 	this->draw_objects.push_back(o);
 }

@@ -1,6 +1,6 @@
 #include <math.h>
+#include <SDL2/SDL.h>
 #include "SpaceObject.h"
-#include "SdlPrimatives.h"
 #include "GlPrimatives.h"
 
 
@@ -46,8 +46,14 @@ void SpaceObject::update_orbit() {
 	if (is_in_orbit()) {
 		this->orbit->update_phase();
 
-		float center_offset_x = this->center.get_floatX() - this->pos.get_floatX();
-		float center_offset_y = this->center.get_floatY() - this->pos.get_floatY();
+		//float center_offset_x = this->center.get_floatX() - this->orbit->get_body()->get_size().x / 2.0f;
+		//float center_offset_y = this->center.get_floatY() - this->orbit->get_body()->get_size().y / 2.0f;
+
+		//float center_offset_x = this->center.get_floatX() - this->get_size().x / 2.0f;
+		//float center_offset_y = this->center.get_floatY() - this->get_size().y / 2.0f;
+
+		float center_offset_x = this->size.x;
+		float center_offset_y = this->size.y;
 
 		this->center = Coord(this->orbit->get_abs_center_x(), this->orbit->get_abs_center_y());
 		this->pos = Coord(this->center.get_floatX() - center_offset_x, this->center.get_floatY() - center_offset_y);
@@ -105,16 +111,23 @@ void SpaceObject::draw_orbit() {
 			glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
 			glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
 
-			float z_pos_3d = this->pos.get_floatY();
-			glm::vec3 translation_vector(this->pos.get_floatX(), -250, z_pos_3d);
+			//float z_pos_3d = this->orbit->get_y();
+			float orbit_radius = this->orbit->get_radius();
+			float z_pos_3d = this->pos.get_floatY() - this->orbit->get_radius();
+			
+			Coord body_center = this->orbit->get_body()->center;
+			float body_radius = this->orbit->get_body()->get_size().x / 2.0f;
+			glm::vec3 translation_vector(body_center.get_floatX() - body_radius, 0, body_center.get_floatY() - body_radius);
 			glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
+			//glm::vec3 translation_vector(this->orbit->get_x(), -this->orbit->get_radius(), 0);
+			//glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 
 			//float x_angle_radians = this->rotation_position.x;
 			//float y_angle_radians = this->rotation_position.y;
 			//float z_angle_radians = this->rotation_position.z;
-			float x_angle_radians = 0.0f;
-			float y_angle_radians = 0.0f;
-			float z_angle_radians = 0.0f;
+			float x_angle_radians = M_PI / 2.0f;
+			float y_angle_radians = M_PI;
+			float z_angle_radians = M_PI;
 
 
 			glm::mat4 rotation_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
