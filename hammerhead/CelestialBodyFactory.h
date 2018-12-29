@@ -15,10 +15,9 @@ public:
 	}
 
 	static unique_ptr<Planet> create_planet(string name, Coord pos, float radius, Asset3d asset, Color color) {
-		Coord center = Coord(pos.get_floatX() + radius, pos.get_floatY() + radius);
 		Vector2 direction(0, 0);
 
-		unique_ptr<Planet> planet(new Planet(pos, center, direction, radius));
+		unique_ptr<Planet> planet(new Planet(pos, direction, radius));
 		planet->set_name(name);
 
 		float diameter = radius * 2;
@@ -32,10 +31,9 @@ public:
 	}
 
 	static unique_ptr<Moon> create_moon(string name, Coord pos, float radius, Asset3d asset, Color color) {
-		Coord center = Coord(pos.get_floatX() + radius, pos.get_floatY() + radius);
 		Vector2 direction(0, 0);
 
-		unique_ptr<Moon> moon(new Moon(pos, center, direction, radius));
+		unique_ptr<Moon> moon(new Moon(pos, direction, radius));
 		moon->set_name(name);
 
 		float diameter = radius * 2;
@@ -49,10 +47,9 @@ public:
 	}
 
 	static unique_ptr<Sun> create_sun(string name, Coord pos, float radius, Asset3d asset, Color color) {
-		Coord center = Coord(pos.get_floatX() + radius, pos.get_floatY() + radius);
 		Vector2 direction(0, 0);
 
-		unique_ptr<Sun> sun(new Sun(pos, center, direction, radius));
+		unique_ptr<Sun> sun(new Sun(pos, direction, radius));
 		sun->set_name(name);
 
 		float diameter = radius * 2;

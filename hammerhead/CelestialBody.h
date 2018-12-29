@@ -8,8 +8,8 @@ private:
 	float mass;
 protected:
 public:
-	CelestialBody(Coord pos, Coord center, Vector2 direction, float radius) :
-		SpaceObject(pos, center, direction, Vector2(radius * 2, radius * 2)), radius(radius) {
+	CelestialBody(Coord center, Vector2 direction, float radius) :
+		SpaceObject(center, direction, Vector2(radius * 2, radius * 2)), radius(radius) {
 	}
 
 	void set_atmosphere_radius(float value);

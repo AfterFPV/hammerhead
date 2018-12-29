@@ -3,7 +3,7 @@
 
 class Moon : public CelestialBody {
 public:
-	Moon(Coord pos, Coord center, Vector2 direction, float radius) :
-		CelestialBody(pos, center, direction, radius) {
+	Moon(Coord pos, Vector2 direction, float radius) :
+		CelestialBody(pos, direction, radius) {
 	}
 };

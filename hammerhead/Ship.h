@@ -7,8 +7,8 @@ private:
 	float range;
 protected:
 public:
-	Ship(Coord pos, Coord center, Vector2 direction, Vector2 size, float damage, float range) :
-		SpaceObject(pos, center, direction, size), damage(damage), range(range) {
+	Ship(Coord pos, Vector2 direction, Vector2 size, float damage, float range) :
+		SpaceObject(pos, direction, size), damage(damage), range(range) {
 	}
 
 	float get_damage();

@@ -8,6 +8,11 @@ Orbit* SpaceObject::get_orbit() {
 	return this->orbit;
 }
 
+Coord SpaceObject::offset_position(Coord center, Vector2 size)
+{
+	return Coord(center.get_floatX() - (size.x * 0.5f), center.get_floatY() - (size.y * 0.5f));
+}
+
 void  SpaceObject::set_orbit(Orbit* orbit) {
 	this->orbit = orbit;
 

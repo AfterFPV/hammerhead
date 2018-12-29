@@ -72,7 +72,6 @@ void GameObject::draw() {
 		glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
 		glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
 
-		float z_pos_3d = this->pos.get_floatY();
 		//glm::vec3 translation_vector(this->pos.get_floatX(), 0, z_pos_3d);
 
 		glm::vec3 translation_vector(this->pos.get_floatX(), this->pos.get_floatY(), 0);
