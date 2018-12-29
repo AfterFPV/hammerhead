@@ -221,14 +221,14 @@
     <None Include="models\stl\sphere.stl">
       <Filter>Resource Files\models\stl</Filter>
     </None>
-    <None Include="shaders\tutorial2.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\tutorial2.vert">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="models\obj\ship-1.mtl">
       <Filter>Resource Files\models\obj</Filter>
+    </None>
+    <None Include="shaders\shader.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\shader.frag">
+      <Filter>shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

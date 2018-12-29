@@ -56,8 +56,17 @@ void GameObject::draw() {
 
 		glm::vec3 scaling_factor = this->model->get_normalized_scaling_factor();
 
+		if (o.material_id > 0) {
+			std::string material_name = this->model->get_materials()[o.material_id].diffuse_texname;
+
+			if (this->model->get_textures().find(material_name) != this->model->get_textures().end()) {
+				GLuint texture_id = this->model->get_textures().at(material_name);		
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, texture_id);
+			}
+		}
+
 		glBindVertexArray(o.vao_id);
-		//glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
 
 		glm::mat4 identity_matrix = glm::mat4(1.0);
 		glm::mat4 model_matrix;
@@ -72,10 +81,7 @@ void GameObject::draw() {
 		glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
 		glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
 
-		//glm::vec3 translation_vector(this->pos.get_floatX(), 0, z_pos_3d);
-
 		glm::vec3 translation_vector(this->pos.get_floatX(), this->pos.get_floatY(), 0);
-		//glm::vec3 translation_vector(this->pos.get_floatX() + this->window_offset.x, this->pos.get_floatY() + this->window_offset.y, 0);
 		glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 
 		float x_angle_radians = this->rotation_position.x;
@@ -91,6 +97,32 @@ void GameObject::draw() {
 		glm::mat4 mvp = this->projection * this->view * model_matrix;
 		glUniformMatrix4fv(glGetUniformLocation(this->shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
 
+
+
+		/*
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, o.position_vbo);
+
+		glDisableVertexAttribArray(1);
+		//glEnableVertexAttribArray(1);
+		//glBindBuffer(GL_ARRAY_BUFFER, o.color_vbo);
+
+		if (o.normal_vbo > 0) {
+			glEnableVertexAttribArray(2);
+			glBindBuffer(GL_ARRAY_BUFFER, o.normal_vbo);
+		}
+		else {
+			glDisableVertexAttribArray(2);
+		}
+
+		if (o.texture_coord_vbo > 0) {
+			glEnableVertexAttribArray(3);
+			glBindBuffer(GL_ARRAY_BUFFER, o.texture_coord_vbo);
+		}
+		else {
+			glDisableVertexAttribArray(3);
+		}*/
+
 		glDrawArrays(GL_TRIANGLES, 0, o.num_triangles);
 	}
 }
@@ -105,6 +137,11 @@ void GameObject::set_name(string name) {
 
 string GameObject::get_name() {
 	return this->name;
+}
+
+glm::vec3 GameObject::get_rotation()
+{
+	return this->rotation;
 }
 
 glm::vec3 GameObject::get_rotation_position()

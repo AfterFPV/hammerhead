@@ -18,14 +18,23 @@ public:
 		this->zoom_factor = 1.0f;
 		this->position = glm::vec3(0, 0, 900); //Camera position in World Space
 		this->look_at = glm::vec3(0, 0, 0); //and looks at the origin
-		this->coord_system_orientation = glm::vec3(0, 1, 0);  // Head is up (set to 0,-1,0 to look upside-down)
+		this->coord_system_orientation = glm::vec3(0,1,0);  // Head is up (set to 0,-1,0 to look upside-down)
 
 		this->zoom_levels.push_back(0.27f);
-		this->zoom_levels.push_back(0.3333f);
+		this->zoom_levels.push_back(0.3f);
+		this->zoom_levels.push_back(0.35f);
+		this->zoom_levels.push_back(0.4f);
+		this->zoom_levels.push_back(0.45f);
 		this->zoom_levels.push_back(0.5f);
-		this->zoom_levels.push_back(0.6667f);
+		this->zoom_levels.push_back(0.55f);
+		this->zoom_levels.push_back(0.6f);
+		this->zoom_levels.push_back(0.65f);
+		this->zoom_levels.push_back(0.7f);
 		this->zoom_levels.push_back(0.75f);
+		this->zoom_levels.push_back(0.8f);
+		this->zoom_levels.push_back(0.85f);
 		this->zoom_levels.push_back(0.9f);
+		this->zoom_levels.push_back(0.95f);
 		this->zoom_levels.push_back(1.0f);
 		this->zoom_levels.push_back(1.25f);
 		this->zoom_levels.push_back(1.5f);
@@ -35,13 +44,23 @@ public:
 		this->zoom_levels.push_back(4.0f);
 		this->zoom_levels.push_back(5.0f);
 		this->zoom_levels.push_back(6.0f);
+		this->zoom_levels.push_back(7.0f);
 		this->zoom_levels.push_back(8.0f);
+		this->zoom_levels.push_back(9.0f);
+		this->zoom_levels.push_back(10.0f);
 		this->zoom_levels.push_back(12.0f);
+		this->zoom_levels.push_back(14.0f);
 		this->zoom_levels.push_back(16.0f);
+		this->zoom_levels.push_back(18.0f);
+		this->zoom_levels.push_back(20.0f);
+		this->zoom_levels.push_back(22.0f);
 		this->zoom_levels.push_back(24.0f);
+		this->zoom_levels.push_back(26.0f);
+		this->zoom_levels.push_back(28.0f);
+		this->zoom_levels.push_back(30.0f);
 		this->zoom_levels.push_back(32.0f);
 
-		this->zoom_index = 6;
+		this->zoom_index = 15;
 	}
 
 	void set_aspect_width(float value) {

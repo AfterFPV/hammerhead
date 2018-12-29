@@ -10,7 +10,8 @@ Orbit* SpaceObject::get_orbit() {
 
 Coord SpaceObject::offset_position(Coord center, Vector2 size)
 {
-	return Coord(center.get_floatX() - (size.x * 0.5f), center.get_floatY() - (size.y * 0.5f));
+	//return Coord(center.get_floatX() + (size.x * 0.5f), center.get_floatY() + (size.y * 0.5f));
+	return Coord(center.get_floatX(), center.get_floatY());
 }
 
 void  SpaceObject::set_orbit(Orbit* orbit) {
@@ -51,17 +52,8 @@ void SpaceObject::update_orbit() {
 	if (is_in_orbit()) {
 		this->orbit->update_phase();
 
-		//float center_offset_x = this->center.get_floatX() - this->orbit->get_body()->get_size().x / 2.0f;
-		//float center_offset_y = this->center.get_floatY() - this->orbit->get_body()->get_size().y / 2.0f;
-
-		//float center_offset_x = this->center.get_floatX() - this->get_size().x / 2.0f;
-		//float center_offset_y = this->center.get_floatY() - this->get_size().y / 2.0f;
-
-		float center_offset_x = this->size.x;
-		float center_offset_y = this->size.y;
-
-		this->center = Coord(this->orbit->get_abs_center_x(), this->orbit->get_abs_center_y());
-		this->pos = Coord(this->center.get_floatX() - center_offset_x, this->center.get_floatY() - center_offset_y);
+		this->center = Coord(this->orbit->get_abs_x(), this->orbit->get_abs_y());
+		this->pos = offset_position(this->center, this->size);
 	}
 }
 
@@ -83,9 +75,6 @@ void SpaceObject::draw() {
 
 void SpaceObject::draw_orbit() {
 	if (is_in_orbit()) {		
-		int orbit_x = this->orbit->get_body()->get_center().get_intX();
-		int orbit_y = this->orbit->get_body()->get_center().get_intY();
-		int orbit_radius = this->orbit->get_radius();
 
 		for (size_t i = 0; i < this->orbit->get_draw_objects().size(); i++) {
 			DrawObject o = this->orbit->get_draw_objects()[i];
@@ -93,20 +82,13 @@ void SpaceObject::draw_orbit() {
 				continue;
 			}
 
-			//glm::vec3 scaling_factor = this->model->get_normalized_scaling_factor();
-
 			glBindVertexArray(o.vao_id);
-			//glBindBuffer(GL_ARRAY_BUFFER, o.vao_id);
 
 			glm::mat4 identity_matrix = glm::mat4(1.0);
 			glm::mat4 model_matrix;
 			glm::vec3 x_axis(1, 0, 0);
 			glm::vec3 y_axis(0, 1, 0);
 			glm::vec3 z_axis(0, 0, 1);
-
-			//float scaling_factor_x = this->orbit->get_radius();
-			//float scaling_factor_y = this->orbit->get_radius();
-			//float scaling_factor_z = scaling_factor_x;
 
 			//Primitive objects should already be scaled to view
 			float scaling_factor_x = 1.0f;
@@ -115,28 +97,16 @@ void SpaceObject::draw_orbit() {
 
 			glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
 			glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
-
-			//float z_pos_3d = this->orbit->get_y();
-			float orbit_radius = this->orbit->get_radius();
-			float z_pos_3d = this->pos.get_floatY() - this->orbit->get_radius();
 			
-			Coord body_center = this->orbit->get_body()->center;
-			float body_radius = this->orbit->get_body()->get_size().x / 2.0f;
+			Coord body_pos = this->orbit->get_body()->pos;
 
-			glm::vec3 translation_vector(body_center.get_floatX() - body_radius, body_center.get_floatY() - body_radius, 0);
-			//glm::vec3 translation_vector(body_center.get_floatX() - body_radius, body_center.get_floatY() - body_radius, 0);
+			glm::vec3 translation_vector(body_pos.get_floatX(), body_pos.get_floatY(), 0);
 			glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
-			//glm::vec3 translation_vector(this->orbit->get_x(), -this->orbit->get_radius(), 0);
-			//glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 
-			glm::vec3 body_rotation = this->orbit->get_body()->get_rotation_position();
+			glm::vec3 body_rotation = this->orbit->get_body()->get_rotation();
 			float x_angle_radians = body_rotation.x;
 			float y_angle_radians = body_rotation.y;
 			float z_angle_radians = body_rotation.z;
-			//float x_angle_radians = M_PI / 2.0f;
-			//float y_angle_radians = M_PI;
-			//float z_angle_radians = M_PI;
-
 			
 			glm::mat4 rotation_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
 			rotation_matrix = glm::rotate(rotation_matrix, y_angle_radians, y_axis);
@@ -147,6 +117,12 @@ void SpaceObject::draw_orbit() {
 
 			glm::mat4 mvp = this->projection * this->view * model_matrix;
 			glUniformMatrix4fv(glGetUniformLocation(this->shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
+
+			glEnableVertexAttribArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, o.position_vbo);
+
+			glEnableVertexAttribArray(1);
+			glBindBuffer(GL_ARRAY_BUFFER, o.color_vbo);
 
 			glDrawArrays(GL_TRIANGLES, 0, o.num_triangles);
 		}

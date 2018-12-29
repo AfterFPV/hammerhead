@@ -254,8 +254,8 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     </None>
     <None Include="models\obj\ship-1.mtl" />
     <None Include="models\stl\sphere.stl" />
-    <None Include="shaders\tutorial2.frag" />
-    <None Include="shaders\tutorial2.vert" />
+    <None Include="shaders\shader.frag" />
+    <None Include="shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\box.png" />

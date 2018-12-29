@@ -20,6 +20,9 @@ public:
 		DrawObject o;
 		float outer_radius = radius;
 		float inner_radius = radius - width;
+		float color_r = (float)color.r / 255.0f;
+		float color_g = (float)color.g / 255.0f;
+		float color_b = (float)color.b / 255.0f;
 		vector<float> v_positions;
 		vector<float> v_colors;
 		float phase_increment = 2.0f * M_PI / (float)num_segments;
@@ -67,11 +70,11 @@ public:
 			v_positions.push_back(in_y_end);
 			v_positions.push_back(0.0);			
 
-			int color_vertex_count = 3;
+			int color_vertex_count = 6;
 			for (int j = 0; j < color_vertex_count; j++) {
-				v_colors.push_back(color.r);
-				v_colors.push_back(color.g);
-				v_colors.push_back(color.b);
+				v_colors.push_back(color_r);
+				v_colors.push_back(color_g);
+				v_colors.push_back(color_b);
 			}
 		}
 
@@ -86,16 +89,18 @@ public:
 		glGenBuffers(2, vbo);
 
 		//Setup position attributes
+		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 		glBufferData(GL_ARRAY_BUFFER, v_positions.size() * sizeof(float), &v_positions.at(0), GL_STATIC_DRAW);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
+
 
 		//Setup color attributes
+		glEnableVertexAttribArray(1);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
 		glBufferData(GL_ARRAY_BUFFER, v_colors.size() * sizeof(float), &v_colors.at(0), GL_STATIC_DRAW);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(1);
+
 
 		o.position_vbo = vbo[0];
 		o.color_vbo = vbo[1];

@@ -483,16 +483,22 @@ public:
 			}
 
 			o.vao_id = 0;
+			o.material_id = 0;
 			o.num_triangles = 0;
 
 			// OpenGL viewer does not support texturing with per-face material.
 			if (shapes[s].mesh.material_ids.size() > 0 &&
 				shapes[s].mesh.material_ids.size() > s) {
-				o.material_id = shapes[s].mesh.material_ids[0];  // use the material ID
+				int material_id = shapes[s].mesh.material_ids[0];  // use the material ID
 																	// of the first face.
+
+				if (material_id > 0) {
+					o.material_id = material_id;
+				}
 			}
 			else {
-				o.material_id = materials.size() - 1;  // = ID for default material.
+				//o.material_id = materials.size() - 1;  // = ID for default material.
+				o.material_id = 0;  // = ID for default material.
 			}
 			printf("shape[%d] material_id %d\n", int(s), int(o.material_id));
 

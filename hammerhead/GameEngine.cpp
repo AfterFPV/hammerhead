@@ -64,13 +64,13 @@ void GameEngine::input_move(float x, float y, float delta_x, float delta_y) {
 		glm::vec3 camera_position = this->camera.get_position();
 		glm::vec3 camera_look_at = this->camera.get_look_at();
 
-		this->camera.set_position(glm::vec3(camera_position.x + (this->pan_factor * delta_x), camera_position.y, camera_position.z + (this->pan_factor * delta_y)));
-		this->camera.set_look_at(glm::vec3(camera_look_at.x + (this->pan_factor * delta_x), camera_look_at.y, camera_look_at.z + (this->pan_factor * delta_y)));
+		this->camera.set_position(glm::vec3(camera_position.x - (this->pan_factor * delta_x), camera_position.y + (this->pan_factor * delta_y), camera_position.z));
+		this->camera.set_look_at(glm::vec3(camera_look_at.x - (this->pan_factor * delta_x), camera_look_at.y + (this->pan_factor * delta_y), camera_look_at.z));
 	}
 	else if (this->is_camera_moving) {
 		glm::vec3 camera_position = this->camera.get_position();
 
-		this->camera.set_position(glm::vec3(camera_position.x + (this->pan_factor * delta_x), camera_position.y, camera_position.z + (this->pan_factor * delta_y)));
+		this->camera.set_position(glm::vec3(camera_position.x - (this->pan_factor * delta_x), camera_position.y + (this->pan_factor * delta_y), camera_position.z));
 	}
 }
 
@@ -188,8 +188,8 @@ void GameEngine::init_shaders() {
 	char* shader_program_info_log;
 
 	//Read our shaders into the appropriate buffers
-	vertex_source = file_read("shaders/tutorial2.vert");
-	fragment_source = file_read("shaders/tutorial2.frag");
+	vertex_source = file_read("shaders/shader.vert");
+	fragment_source = file_read("shaders/shader.frag");
 	//vertex_source = this->vertex_shader_source.c_str();
 	//fragment_source = this->fragment_shader_source.c_str();
 
@@ -394,8 +394,10 @@ void GameEngine::init_map() {
 	moon->set_orbit(earth_orbit);
 	moon->set_rotation(glm::vec3(0, 0, 0.10));
 
-	Coord ship_pos(0, 0);
-	Vector2 ship_direction(1, 1);
+	Coord ship_pos(180, 180);
+	//Vector2 ship_direction(1, 1);
+
+	Vector2 ship_direction(0, 0);
 	Vector2 ship_size(20, 20);
 	unique_ptr<Ship> ship = ShipFactory::create("intrepid", ship_pos, ship_size, assets.get_asset("ship-1"));
 	ship->set_direction(ship_direction);
