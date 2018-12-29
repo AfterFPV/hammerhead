@@ -117,22 +117,26 @@ void SpaceObject::draw_orbit() {
 			
 			Coord body_center = this->orbit->get_body()->center;
 			float body_radius = this->orbit->get_body()->get_size().x / 2.0f;
-			glm::vec3 translation_vector(body_center.get_floatX() - body_radius, 0, body_center.get_floatY() - body_radius);
+
+			glm::vec3 translation_vector(body_center.get_floatX() - body_radius, body_center.get_floatY() - body_radius, 0);
+			//glm::vec3 translation_vector(body_center.get_floatX() - body_radius, body_center.get_floatY() - body_radius, 0);
 			glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 			//glm::vec3 translation_vector(this->orbit->get_x(), -this->orbit->get_radius(), 0);
 			//glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 
-			//float x_angle_radians = this->rotation_position.x;
-			//float y_angle_radians = this->rotation_position.y;
-			//float z_angle_radians = this->rotation_position.z;
-			float x_angle_radians = M_PI / 2.0f;
-			float y_angle_radians = M_PI;
-			float z_angle_radians = M_PI;
+			glm::vec3 body_rotation = this->orbit->get_body()->get_rotation_position();
+			float x_angle_radians = body_rotation.x;
+			float y_angle_radians = body_rotation.y;
+			float z_angle_radians = body_rotation.z;
+			//float x_angle_radians = M_PI / 2.0f;
+			//float y_angle_radians = M_PI;
+			//float z_angle_radians = M_PI;
 
-
+			
 			glm::mat4 rotation_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
 			rotation_matrix = glm::rotate(rotation_matrix, y_angle_radians, y_axis);
 			rotation_matrix = glm::rotate(rotation_matrix, z_angle_radians, z_axis);
+			
 
 			model_matrix = translation_matrix * rotation_matrix * scaling_matrix;
 

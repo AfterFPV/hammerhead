@@ -16,9 +16,9 @@ public:
 		this->clip_far = 1000.0f;
 		this->zoom = 1.0f;
 		this->zoom_factor = 1.0f;
-		this->position = glm::vec3(0, 900, 0); //Camera position in World Space
+		this->position = glm::vec3(0, 0, 900); //Camera position in World Space
 		this->look_at = glm::vec3(0, 0, 0); //and looks at the origin
-		this->coord_system_orientation = glm::vec3(0, 1, 1);  // Head is up (set to 0,-1,0 to look upside-down)
+		this->coord_system_orientation = glm::vec3(0, 1, 0);  // Head is up (set to 0,-1,0 to look upside-down)
 
 		this->zoom_levels.push_back(0.27f);
 		this->zoom_levels.push_back(0.3333f);

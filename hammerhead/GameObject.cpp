@@ -73,7 +73,9 @@ void GameObject::draw() {
 		glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
 
 		float z_pos_3d = this->pos.get_floatY();
-		glm::vec3 translation_vector(this->pos.get_floatX(), 0, z_pos_3d);
+		//glm::vec3 translation_vector(this->pos.get_floatX(), 0, z_pos_3d);
+
+		glm::vec3 translation_vector(this->pos.get_floatX(), this->pos.get_floatY(), 0);
 		//glm::vec3 translation_vector(this->pos.get_floatX() + this->window_offset.x, this->pos.get_floatY() + this->window_offset.y, 0);
 		glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
 
@@ -104,6 +106,11 @@ void GameObject::set_name(string name) {
 
 string GameObject::get_name() {
 	return this->name;
+}
+
+glm::vec3 GameObject::get_rotation_position()
+{
+	return this->rotation_position;
 }
 
 void GameObject::calculate_orientation() {

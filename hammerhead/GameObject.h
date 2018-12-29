@@ -58,6 +58,7 @@ public:
 	Vector2 get_direction();
 	Vector2 get_size();
 	string get_name();
+	glm::vec3 get_rotation_position();
 	void update_position();
 	void calculate_orientation();
 	void set_window_size(glm::vec2 window_size);
