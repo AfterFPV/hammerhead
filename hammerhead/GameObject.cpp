@@ -54,76 +54,60 @@ void GameObject::draw() {
 			continue;
 		}
 
-		glm::vec3 scaling_factor = this->model->get_normalized_scaling_factor();
-
-		if (o.material_id > 0) {
-			std::string material_name = this->model->get_materials()[o.material_id].diffuse_texname;
-
-			if (this->model->get_textures().find(material_name) != this->model->get_textures().end()) {
-				GLuint texture_id = this->model->get_textures().at(material_name);		
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, texture_id);
-			}
-		}
 
 		glBindVertexArray(o.vao_id);
 
-		glm::mat4 identity_matrix = glm::mat4(1.0);
-		glm::mat4 model_matrix;
-		glm::vec3 x_axis(1, 0, 0);
-		glm::vec3 y_axis(0, 1, 0);
-		glm::vec3 z_axis(0, 0, 1);
+		glm::vec3 scaling_factor = this->model->get_normalized_scaling_factor();
 
-		float scaling_factor_x = scaling_factor.x * this->size.x;
-		float scaling_factor_y = scaling_factor.y * this->size.y;
-		float scaling_factor_z = scaling_factor_x;
+		for (size_t t = 0; t < o.material_ranges.size(); t++) {
+			MaterialRange range = o.material_ranges[t];
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, range.texture_id);
 
-		glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
-		glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
+			/*
+			if (o.material_id > 0) {
+				std::string material_name = this->model->get_materials()[o.material_id].diffuse_texname;
 
-		glm::vec3 translation_vector(this->pos.get_floatX(), this->pos.get_floatY(), 0);
-		glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
-
-		float x_angle_radians = this->rotation_position.x;
-		float y_angle_radians = this->rotation_position.y;
-		float z_angle_radians = this->rotation_position.z;
-
-		glm::mat4 rotation_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
-		rotation_matrix = glm::rotate(rotation_matrix, y_angle_radians, y_axis);
-		rotation_matrix = glm::rotate(rotation_matrix, z_angle_radians, z_axis);
-
-		model_matrix = translation_matrix * rotation_matrix * scaling_matrix;
-
-		glm::mat4 mvp = this->projection * this->view * model_matrix;
-		glUniformMatrix4fv(glGetUniformLocation(this->shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
+				if (this->model->get_textures().find(material_name) != this->model->get_textures().end()) {
+					GLuint texture_id = this->model->get_textures().at(material_name);
+					glActiveTexture(GL_TEXTURE0);
+					glBindTexture(GL_TEXTURE_2D, texture_id);
+				}
+			}*/
 
 
+			glm::mat4 identity_matrix = glm::mat4(1.0);
+			glm::mat4 model_matrix;
+			glm::vec3 x_axis(1, 0, 0);
+			glm::vec3 y_axis(0, 1, 0);
+			glm::vec3 z_axis(0, 0, 1);
 
-		/*
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, o.position_vbo);
+			float scaling_factor_x = scaling_factor.x * this->size.x;
+			float scaling_factor_y = scaling_factor.y * this->size.y;
+			float scaling_factor_z = scaling_factor_x;
 
-		glDisableVertexAttribArray(1);
-		//glEnableVertexAttribArray(1);
-		//glBindBuffer(GL_ARRAY_BUFFER, o.color_vbo);
+			glm::vec3 scaling_vector(scaling_factor_x, scaling_factor_y, scaling_factor_z);
+			glm::mat4 scaling_matrix = glm::scale(identity_matrix, scaling_vector);
 
-		if (o.normal_vbo > 0) {
-			glEnableVertexAttribArray(2);
-			glBindBuffer(GL_ARRAY_BUFFER, o.normal_vbo);
+			glm::vec3 translation_vector(this->pos.get_floatX(), this->pos.get_floatY(), 0);
+			glm::mat4 translation_matrix = glm::translate(identity_matrix, translation_vector);
+
+			float x_angle_radians = this->rotation_position.x;
+			float y_angle_radians = this->rotation_position.y;
+			float z_angle_radians = this->rotation_position.z;
+
+			glm::mat4 rotation_matrix = glm::rotate(identity_matrix, x_angle_radians, x_axis);
+			rotation_matrix = glm::rotate(rotation_matrix, y_angle_radians, y_axis);
+			rotation_matrix = glm::rotate(rotation_matrix, z_angle_radians, z_axis);
+
+			model_matrix = translation_matrix * rotation_matrix * scaling_matrix;
+
+			glm::mat4 mvp = this->projection * this->view * model_matrix;
+			glUniformMatrix4fv(glGetUniformLocation(this->shader_program, "mvpmatrix"), 1, GL_FALSE, glm::value_ptr(mvp));
+
+			glDrawArrays(GL_TRIANGLES, range.triangle_start, range.triangle_end);
+			//glDrawArrays(GL_TRIANGLES, 0, o.num_triangles);
 		}
-		else {
-			glDisableVertexAttribArray(2);
-		}
-
-		if (o.texture_coord_vbo > 0) {
-			glEnableVertexAttribArray(3);
-			glBindBuffer(GL_ARRAY_BUFFER, o.texture_coord_vbo);
-		}
-		else {
-			glDisableVertexAttribArray(3);
-		}*/
-
-		glDrawArrays(GL_TRIANGLES, 0, o.num_triangles);
 	}
 }
 

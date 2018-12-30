@@ -1,6 +1,10 @@
 #pragma once
 #include <GL/gl3w.h>
 #include <GL/glcorearb.h>
+#include <vector>
+#include "MaterialRange.h"
+
+using namespace std;
 
 typedef struct {
 	GLuint vao_id;  // vertex array object id
@@ -9,5 +13,5 @@ typedef struct {
 	GLuint normal_vbo;
 	GLuint color_vbo;
 	int num_triangles;
-	size_t material_id;
+	vector<MaterialRange> material_ranges;
 } DrawObject;

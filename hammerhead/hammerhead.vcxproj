@@ -118,11 +118,13 @@
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)*.dll" "$(TargetDir)"
 mkdir "$(TargetDir)\images"
-mkdir "$(TargetDir)\models\obj"
+mkdir "$(TargetDir)\models"
+mkdir "$(TargetDir)\models\wf-obj"
 xcopy /y "$(ProjectDir)\images\*.png" "$(TargetDir)\images"
-xcopy /y "$(ProjectDir)\models\obj\*.obj" "$(TargetDir)\models\obj"
-xcopy /y "$(ProjectDir)\models\obj\*.mtl" "$(TargetDir)\models\obj"
-xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
+xcopy /y "$(ProjectDir)\models\wf-obj\*.obj" "$(TargetDir)\models\wf-obj"
+xcopy /y "$(ProjectDir)\models\wf-obj\*.mtl" "$(TargetDir)\models\wf-obj"
+xcopy /y "$(ProjectDir)\models\wf-obj\*.png" "$(TargetDir)\models\wf-obj"
+xcopy /y "$(ProjectDir)\models\wf-obj\*.jpg" "$(TargetDir)\models\wf-obj"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy Required DLL to output</Message>
@@ -216,6 +218,7 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="MaterialRange.h" />
     <ClInclude Include="Moon.h" />
     <ClInclude Include="Orbit.h" />
     <ClInclude Include="OrientationAxes.h" />
@@ -252,8 +255,12 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="models\obj\ship-1.mtl" />
+    <None Include="models\wf-obj\earth.mtl" />
+    <None Include="models\wf-obj\mars.mtl" />
+    <None Include="models\wf-obj\moon.mtl" />
+    <None Include="models\wf-obj\ship-1.mtl" />
     <None Include="models\stl\sphere.stl" />
+    <None Include="models\wf-obj\sun.mtl" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
   </ItemGroup>
@@ -262,17 +269,33 @@ xcopy /y "$(ProjectDir)\models\obj\*.png" "$(TargetDir)\models\obj"</Command>
     <Image Include="images\planet-large.png" />
     <Image Include="images\planet.png" />
     <Image Include="images\ship.png" />
-    <Image Include="models\obj\ship-1-int.png" />
-    <Image Include="models\obj\ship-1-mat.png" />
+    <Image Include="models\wf-obj\earth-mat.jpg" />
+    <Image Include="models\wf-obj\mars-mat.jpg" />
+    <Image Include="models\wf-obj\moon-mat.jpg" />
+    <Image Include="models\wf-obj\ship-1-int.png" />
+    <Image Include="models\wf-obj\ship-1-mat.png" />
+    <Image Include="models\wf-obj\sun-mat.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="models\obj\sphere.obj">
+    <Resource Include="models\wf-obj\sphere.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="models\obj\ship-1.obj">
+    <Object Include="models\wf-obj\earth.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="models\wf-obj\mars.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="models\wf-obj\moon.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="models\wf-obj\ship-1.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="models\wf-obj\sun.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Object>
   </ItemGroup>

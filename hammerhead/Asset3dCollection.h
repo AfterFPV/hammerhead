@@ -17,12 +17,16 @@ public:
 	}
 
 	void load() {
-		load_obj_asset("sphere");
+		load_obj_asset("earth");
+		load_obj_asset("mars");
+		load_obj_asset("moon");
 		load_obj_asset("ship-1");
+		load_obj_asset("sphere");
+		load_obj_asset("sun");
 	}
 
 	void load_obj_asset(string name) {
-		string stl_model_folder = "models/obj";
+		string stl_model_folder = "models/wf-obj";
 		string resource_file_name = stl_model_folder + "/" + name + ".obj";
 		Asset3d asset(name, resource_file_name);
 		assets[name] = asset;
@@ -45,7 +49,7 @@ public:
 		std::vector<tinyobj::shape_t> shapes;
 		std::vector<tinyobj::material_t> materials;
 
-		string materials_base_dir = "models/obj";
+		string materials_base_dir = "models/wf-obj";
 
 		std::string warn;
 		std::string err;
@@ -59,6 +63,7 @@ public:
 			exit(1);
 		}
 
+		/*
 		// Loop over shapes
 		for (size_t s = 0; s < shapes.size(); s++) {
 			// Loop over faces(polygon)
@@ -88,7 +93,7 @@ public:
 				// per-face material
 				shapes[s].mesh.material_ids[f];
 			}
-		}
+		}*/
 
 		Model* m = new Model(asset.get_name(), asset.get_resource_name(), std::move(attrib), std::move(shapes), std::move(materials));
 

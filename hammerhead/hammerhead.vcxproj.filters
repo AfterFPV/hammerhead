@@ -22,19 +22,19 @@
     <Filter Include="gl3w">
       <UniqueIdentifier>{690dffab-f382-42d3-8994-87b549b3af8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\models">
-      <UniqueIdentifier>{3a49eb2d-fc06-49c4-b6e2-772bc253411f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\models\stl">
-      <UniqueIdentifier>{ebb49b77-02c0-4416-8aa1-2e3381250695}</UniqueIdentifier>
-    </Filter>
     <Filter Include="shaders">
       <UniqueIdentifier>{c4e8c887-34a5-4171-be55-5d0566259465}</UniqueIdentifier>
     </Filter>
     <Filter Include="assets">
       <UniqueIdentifier>{da2ca875-9c6d-4582-afa3-cdf55394d672}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\models\obj">
+    <Filter Include="Resource Files\images\models">
+      <UniqueIdentifier>{3a49eb2d-fc06-49c4-b6e2-772bc253411f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\models\stl">
+      <UniqueIdentifier>{ebb49b77-02c0-4416-8aa1-2e3381250695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\models\wf-obj">
       <UniqueIdentifier>{9c5071b2-8e25-4091-99b7-bc009b69daba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -209,6 +209,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MaterialRange.h">
+      <Filter>assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll" />
@@ -219,16 +222,28 @@
     <None Include="..\..\..\..\Software\lib\SDL2\SDL2_image.dll" />
     <None Include="..\..\..\..\Software\lib\glfw\lib-vc2010-64\opengl32.dll" />
     <None Include="models\stl\sphere.stl">
-      <Filter>Resource Files\models\stl</Filter>
-    </None>
-    <None Include="models\obj\ship-1.mtl">
-      <Filter>Resource Files\models\obj</Filter>
+      <Filter>Resource Files\images\models\stl</Filter>
     </None>
     <None Include="shaders\shader.vert">
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\shader.frag">
       <Filter>shaders</Filter>
+    </None>
+    <None Include="models\wf-obj\ship-1.mtl">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </None>
+    <None Include="models\wf-obj\mars.mtl">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </None>
+    <None Include="models\wf-obj\sun.mtl">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </None>
+    <None Include="models\wf-obj\moon.mtl">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </None>
+    <None Include="models\wf-obj\earth.mtl">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -244,21 +259,45 @@
     <Image Include="images\box.png">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="models\obj\ship-1-int.png">
-      <Filter>Resource Files\models\obj</Filter>
+    <Image Include="models\wf-obj\mars-mat.jpg">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
     </Image>
-    <Image Include="models\obj\ship-1-mat.png">
-      <Filter>Resource Files\models\obj</Filter>
+    <Image Include="models\wf-obj\ship-1-int.png">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Image>
+    <Image Include="models\wf-obj\ship-1-mat.png">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Image>
+    <Image Include="models\wf-obj\sun-mat.jpg">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Image>
+    <Image Include="models\wf-obj\earth-mat.jpg">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Image>
+    <Image Include="models\wf-obj\moon-mat.jpg">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="models\obj\sphere.obj">
-      <Filter>Resource Files\models\obj</Filter>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="models\obj\ship-1.obj">
-      <Filter>Resource Files\models\obj</Filter>
+    <Object Include="models\wf-obj\ship-1.obj">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
     </Object>
+    <Object Include="models\wf-obj\mars.obj">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Object>
+    <Object Include="models\wf-obj\sun.obj">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Object>
+    <Object Include="models\wf-obj\earth.obj">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Object>
+    <Object Include="models\wf-obj\moon.obj">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="models\wf-obj\sphere.obj">
+      <Filter>Resource Files\images\models\wf-obj</Filter>
+    </Resource>
   </ItemGroup>
 </Project>

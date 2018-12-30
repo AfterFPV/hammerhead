@@ -20,7 +20,8 @@ void main(void) {
 	ec_pos = gl_Position.xyz;
 	
 	//We're simply passing the color through unmodified
-	ex_Color = in_Color;
+	//ex_Color = in_Color;
+	ex_Color =  vec3(0.99, 0.99, 0.99);
 	ex_Normal = in_Normal;
 	ex_TextureCoord = in_TextureCoord;
 }

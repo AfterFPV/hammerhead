@@ -217,7 +217,7 @@ public:
 	}
 
 	void init_mesh_buffers() {
-		std::string base_dir = "models/obj/";
+		std::string base_dir = "models/wf-obj/";
 		float bmin[3];
 		float bmax[3];
 
@@ -294,6 +294,10 @@ public:
 		
 		for (size_t s = 0; s < shapes.size(); s++) {
 			DrawObject o;
+			int current_material_id = 0;
+			int previous_material_id = -1;
+			int material_triangle_start = 0;
+			int material_triangle_end = 0;
 			//std::vector<float> buffer;  // pos(3float), normal(3float), color(3float)
 			std::vector<float> v_positions;
 			std::vector<float> v_normals;
@@ -312,7 +316,7 @@ public:
 				tinyobj::index_t idx1 = shapes[s].mesh.indices[3 * f + 1];
 				tinyobj::index_t idx2 = shapes[s].mesh.indices[3 * f + 2];
 
-				int current_material_id = shapes[s].mesh.material_ids[f];
+				current_material_id = shapes[s].mesh.material_ids[f];
 
 				if ((current_material_id < 0) ||
 					(current_material_id >= static_cast<int>(materials.size()))) {
@@ -450,6 +454,33 @@ public:
 					}
 				}
 
+
+				if (previous_material_id != current_material_id) {
+					material_triangle_end = (v_positions.size() / 3) - 1;
+					
+					//If previous range was non-empty
+					if (previous_material_id != -1) {
+						string diffuse_texture_name = materials[previous_material_id].diffuse_texname.c_str();
+						GLuint texture_id = 0;
+
+						if (textures.find(diffuse_texture_name) != textures.end()) {
+							texture_id = textures[diffuse_texture_name];
+						}
+
+						MaterialRange range;
+
+						range.triangle_start = material_triangle_start;
+						range.triangle_end = material_triangle_end;
+						range.material_id = previous_material_id;
+						range.texture_id = texture_id;
+
+						o.material_ranges.push_back(range);
+					}
+
+					material_triangle_start = material_triangle_end + 1;
+					previous_material_id = current_material_id;
+				}
+
 				for (int k = 0; k < 3; k++) {
 					v_positions.push_back(v[k][0]);
 					v_positions.push_back(v[k][1]);
@@ -482,28 +513,29 @@ public:
 				}
 			}
 
+			//Add last material_id range (or only one if uniform)			
+			material_triangle_end = (v_positions.size() / 3) - 1;
+			string diffuse_texture_name = materials[current_material_id].diffuse_texname.c_str();
+			GLuint texture_id = 0;
+
+			if (textures.find(diffuse_texture_name) != textures.end()) {
+				texture_id = textures[diffuse_texture_name];
+			}
+
+			MaterialRange range;
+			range.triangle_start = material_triangle_start;
+			range.triangle_end = material_triangle_end;
+			range.material_id = previous_material_id;
+			range.texture_id = texture_id;
+
+			o.material_ranges.push_back(range);
+
 			o.vao_id = 0;
-			o.material_id = 0;
 			o.num_triangles = 0;
-
-			// OpenGL viewer does not support texturing with per-face material.
-			if (shapes[s].mesh.material_ids.size() > 0 &&
-				shapes[s].mesh.material_ids.size() > s) {
-				int material_id = shapes[s].mesh.material_ids[0];  // use the material ID
-																	// of the first face.
-
-				if (material_id > 0) {
-					o.material_id = material_id;
-				}
-			}
-			else {
-				//o.material_id = materials.size() - 1;  // = ID for default material.
-				o.material_id = 0;  // = ID for default material.
-			}
-			printf("shape[%d] material_id %d\n", int(s), int(o.material_id));
 
 			//Setup vao and child buffers
 			if (v_positions.size() > 0) {
+				
 				//Allocate and assign a vertex array object to our handle
 				glGenVertexArrays(1, &o.vao_id);
 

@@ -377,22 +377,22 @@ void GameEngine::set_vertex_shader_source(string value) {
 void GameEngine::init_map() {
 	Coord sun_pos(0, 0);
 	float sun_radius = 50.0;
-	unique_ptr<SpaceObject> sun = CelestialBodyFactory::create_sun("Sun", sun_pos, sun_radius, assets.get_asset("sphere"), Color(251, 184, 41));
-	sun->set_rotation(glm::vec3(0, 0, 0.01));
+	unique_ptr<SpaceObject> sun = CelestialBodyFactory::create_sun("Sun", sun_pos, sun_radius, assets.get_asset("sun"), Color(251, 184, 41));
+	sun->set_rotation(glm::vec3(0, 0, 0.0005));
 
 	Coord earth_pos(280, 0);
 	float earth_radius = 18.0;
-	unique_ptr<SpaceObject> earth = CelestialBodyFactory::create_planet("Earth", earth_pos, earth_radius, assets.get_asset("sphere"), Color(42, 143, 189));
-	Orbit* sun_orbit = new Orbit(sun.get(), 2);
+	unique_ptr<SpaceObject> earth = CelestialBodyFactory::create_planet("Earth", earth_pos, earth_radius, assets.get_asset("earth"), Color(42, 143, 189));
+	Orbit* sun_orbit = new Orbit(sun.get(), 0.4);
 	earth->set_orbit(sun_orbit);
-	earth->set_rotation(glm::vec3(0, 0, 0.05));
+	earth->set_rotation(glm::vec3(0, 0, 0.1));
 
 	Coord moon_pos(380, 0);
 	float moon_radius = 4.5;
-	unique_ptr<SpaceObject> moon = CelestialBodyFactory::create_moon("Moon", moon_pos, moon_radius, assets.get_asset("sphere"), Color(216, 216, 216));
+	unique_ptr<SpaceObject> moon = CelestialBodyFactory::create_moon("Moon", moon_pos, moon_radius, assets.get_asset("moon"), Color(216, 216, 216));
 	Orbit* earth_orbit = new Orbit(earth.get(), 5);
 	moon->set_orbit(earth_orbit);
-	moon->set_rotation(glm::vec3(0, 0, 0.10));
+	moon->set_rotation(glm::vec3(0, 0, 0.005));
 
 	Coord ship_pos(180, 180);
 	//Vector2 ship_direction(1, 1);
