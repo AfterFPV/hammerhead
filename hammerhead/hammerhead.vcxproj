@@ -289,9 +289,7 @@ xcopy /y "$(ProjectDir)\models\wf-obj\*.jpg" "$(TargetDir)\models\wf-obj"</Comma
     <Object Include="models\wf-obj\mars.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="models\wf-obj\moon.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </Object>
+    <Object Include="models\wf-obj\moon.obj" />
     <Object Include="models\wf-obj\ship-1.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Object>
