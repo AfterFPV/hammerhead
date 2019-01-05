@@ -116,7 +116,7 @@
       <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(ProjectDir)*.dll" "$(TargetDir)"
+      <Command>xcopy /y "$(ProjectDir)\dlls\*.dll" "$(TargetDir)"
 mkdir "$(TargetDir)\images"
 mkdir "$(TargetDir)\models"
 mkdir "$(TargetDir)\models\wf-obj"
@@ -186,13 +186,6 @@ xcopy /y "$(ProjectDir)\models\wf-obj\*.jpg" "$(TargetDir)\models\wf-obj"</Comma
     <ClCompile Include="SpaceObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\..\..\Software\lib\SDL2\SDL2.dll">
-      <DeploymentContent>true</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Asset3d.h" />
     <ClInclude Include="Asset3dCollection.h" />
     <ClInclude Include="assets\Model.h" />
@@ -234,25 +227,25 @@ xcopy /y "$(ProjectDir)\models\wf-obj\*.jpg" "$(TargetDir)\models\wf-obj"</Comma
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Software\lib\glfw\lib-vc2010-64\opengl32.dll">
+    <None Include="dlls\libjpeg-9.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\..\Software\lib\SDL2\libjpeg-9.dll">
+    <None Include="dlls\libpng16-16.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\..\Software\lib\SDL2\libpng16-16.dll">
+    <None Include="dlls\libtiff-5.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\..\Software\lib\SDL2\libtiff-5.dll">
+    <None Include="dlls\libwebp-7.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\..\Software\lib\SDL2\libwebp-7.dll">
+    <None Include="dlls\SDL2.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\..\Software\lib\SDL2\SDL2_image.dll">
+    <None Include="dlls\SDL2_image.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\..\Software\lib\SDL2\zlib1.dll">
+    <None Include="dlls\zlib1.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="models\wf-obj\earth.mtl" />
@@ -289,7 +282,9 @@ xcopy /y "$(ProjectDir)\models\wf-obj\*.jpg" "$(TargetDir)\models\wf-obj"</Comma
     <Object Include="models\wf-obj\mars.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="models\wf-obj\moon.obj" />
+    <Object Include="models\wf-obj\moon.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="models\wf-obj\ship-1.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Object>
